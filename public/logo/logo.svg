@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 72" role="img" aria-labelledby="title">
+<title>Virtuve un skapis</title>
+<g fill="none" stroke="#b89560" stroke-width="2">
+<path d="M10 54V22l22-14 22 14v32H10Z"/><path d="M20 54V28l12-8 12 8v26"/><path d="M27 54V39h10v15"/>
+</g>
+<text x="70" y="30" fill="currentColor" font-family="Arial, sans-serif" font-size="20" letter-spacing="3">VIRTUVE</text>
+<text x="70" y="54" fill="currentColor" font-family="Arial, sans-serif" font-size="20" letter-spacing="3">UN SKAPIS</text>
+</svg>
