@@ -31,15 +31,17 @@ export function Header() {
         </div>
       </div>
       {open && (
-        <nav className="mobile-nav" aria-label="Mobilā navigācija">
-          {headerNavigation.map((item) => <Link onClick={() => setOpen(false)} key={item.href + item.label} href={item.href}>{item.label}</Link>)}
-          <div className="mobile-language-switcher" aria-label="Valodas izvēle">
-            <Link href="/" aria-current="page">LV</Link>
-            <Link href="/" aria-disabled="true">RU</Link>
-            <Link href="/" aria-disabled="true">EN</Link>
-          </div>
-          <Link onClick={() => setOpen(false)} className="button button-primary" href="/contacts">Sazināties</Link>
-        </nav>
+        <div className="mobile-nav-overlay" onClick={() => setOpen(false)}>
+          <nav className="mobile-nav" aria-label="Mobilā navigācija" onClick={(event) => event.stopPropagation()}>
+            {headerNavigation.map((item) => <Link onClick={() => setOpen(false)} key={item.href + item.label} href={item.href}>{item.label}</Link>)}
+            <div className="mobile-language-switcher" aria-label="Valodas izvēle">
+              <Link href="/" aria-current="page">LV</Link>
+              <Link href="/" aria-disabled="true">RU</Link>
+              <Link href="/" aria-disabled="true">EN</Link>
+            </div>
+            <Link onClick={() => setOpen(false)} className="button button-primary" href="/contacts">Sazināties</Link>
+          </nav>
+        </div>
       )}
     </header>
   )
