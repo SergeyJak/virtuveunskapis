@@ -10,8 +10,10 @@ export function ProjectCard({ project }: { project: Project }) {
       </div>
       <div className="project-meta">
         <div>
+          <p className="project-card-category">{project.category}</p>
           <h3>{project.title}</h3>
           <p>{project.location}</p>
+          <p className="project-card-description">{project.description}</p>
         </div>
         <span aria-hidden>→</span>
       </div>
