@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
@@ -14,7 +13,7 @@ export function Header() {
     <header className="site-header">
       <div className="container header-inner">
         <Link href="/" className="brand" aria-label="Virtuve un skapis">
-          <Image src="/logo/logo.svg" alt="Virtuve un skapis" width={230} height={64} priority />
+          <img src="/logo/logo-original.png" alt="Virtuve un skapis" width={433} height={160} />
         </Link>
         <nav className="desktop-nav" aria-label="Galvenā navigācija">
           {headerNavigation.map((item) => <Link key={item.href + item.label} href={item.href}>{item.label}</Link>)}
