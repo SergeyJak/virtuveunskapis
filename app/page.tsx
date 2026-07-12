@@ -13,7 +13,7 @@ export default function HomePage() {
         <Header />
         <main>
           <section className="hero">
-            <Image className="hero-image" src="/images/hero.jpg" alt="Individuāli projektēta tumša virtuve" fill priority sizes="100vw" />
+            <Image className="hero-image" src="/images/hero.jpg" alt="Individuāli projektēta tumša virtuve" fill priority sizes="100vw" unoptimized />
             <div className="hero-shade hero-shade-home" />
             <div className="container hero-content">
               <h1>Mēbeles,<br />ko vēlaties katru<br />dienu redzēt mājās</h1>

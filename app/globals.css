@@ -41,7 +41,7 @@ img { object-fit: cover; }
 .button-ghost:hover { background: rgba(255,255,255,.1); }
 
 .hero { min-height: 840px; position: relative; display: flex; align-items: center; color: white; overflow: hidden; }
-.hero-image { z-index: -3; object-position: right center; transform: scale(1.18); transform-origin: right center; }
+.hero-image { z-index: -3; object-position: center center; }
 .hero-shade { position: absolute; inset: 0; z-index: -2; background: linear-gradient(90deg, rgba(5,5,4,.88) 0%, rgba(5,5,4,.58) 34%, rgba(5,5,4,.2) 54%, rgba(5,5,4,.02) 78%); }
 .hero-shade-home::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,.10), rgba(0,0,0,0)); }
 .hero-content { padding-top: 150px; padding-bottom: 24px; }
