@@ -21,3 +21,17 @@ Context Economy
 
 Если требуется больше —
 остановиться и сообщить об этом.
+
+## Context
+
+Never read files that are not required for the current task.
+
+Never search the whole repository unless TASK.md explicitly requires it.
+
+## Completion
+
+After completing the task:
+
+- Stop immediately.
+- Do not start the next task.
+- Do not suggest code changes unless requested.
