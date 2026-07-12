@@ -1,0 +1,8 @@
+
+> virtuveunskapis-mvp@1.0.0 start
+> next start -p 3017
+
+▲ Next.js 16.2.10
+- Local:         http://localhost:3017
+- Network:       http://172.26.16.1:3017
+✓ Ready in 289ms

@@ -4,7 +4,14 @@ import { ArrowRight, DraftingCompass, ShieldCheck, Sparkles, Timer } from 'lucid
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ProjectCard } from '@/components/ProjectCard'
-import { categories, projects } from '@/data/site'
+import { projects } from '@/data/site'
+
+const homeCategories = [
+  { title: 'Virtuves', href: '/portfolio?category=kitchens', image: '/images/categories/kitchens.jpg' },
+  { title: 'Skapji', href: '/portfolio?category=wardrobes', image: '/images/categories/wardrobes.jpg' },
+  { title: 'Vannas istabas', href: '/portfolio?category=bathrooms', image: '/images/categories/bathrooms.jpg' },
+  { title: 'Citas mēbeles', href: '/portfolio?category=tv-units', image: '/images/categories/tv-units.jpg' },
+]
 
 export default function HomePage() {
   return (
@@ -31,9 +38,9 @@ export default function HomePage() {
         <div className="container">
           <div className="section-heading"><h2>Atrodiet mēbeles savam mājoklim</h2><Link href="/portfolio">Visi projekti →</Link></div>
           <div className="category-grid">
-            {categories.map((category) => (
-              <Link key={category.slug} className="category-card" href={`/portfolio?category=${category.slug}`}>
-                <Image src={category.image} alt={category.title} fill sizes="(max-width: 760px) 100vw, 20vw" />
+            {homeCategories.map((category) => (
+              <Link key={category.title} className="category-card" href={category.href}>
+                <Image src={category.image} alt={category.title} fill sizes="(max-width: 760px) 100vw, 25vw" />
                 <div className="category-overlay"><h3>{category.title}</h3><span>→</span></div>
               </Link>
             ))}
