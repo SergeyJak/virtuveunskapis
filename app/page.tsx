@@ -9,17 +9,17 @@ import { categories, projects } from '@/data/site'
 export default function HomePage() {
   return (
     <>
-      <div className="hero-shell">
+      <div className="hero-shell hero-shell-home">
         <Header />
         <main>
           <section className="hero">
             <Image className="hero-image" src="/images/hero.jpg" alt="Individuāli projektēta tumša virtuve" fill priority sizes="100vw" />
-            <div className="hero-shade" />
+            <div className="hero-shade hero-shade-home" />
             <div className="container hero-content">
-              <h1>Mēbeles,<br/>ko vēlaties redzēt mājās katru dienu</h1>
+              <h1>Mēbeles,<br />ko vēlaties katru<br />dienu redzēt mājās</h1>
               <p>Projektējam, izgatavojam un uzstādām mēbeles pēc individuāliem izmēriem Rīgā un visā Latvijā.</p>
               <div className="hero-buttons">
-                <Link className="button button-primary" href="/portfolio">Apskatīt projektus <ArrowRight size={18}/></Link>
+                <Link className="button button-primary" href="/portfolio">Apskatīt projektus <ArrowRight size={18} /></Link>
                 <Link className="button button-ghost" href="/contacts">Sazināties ar mums</Link>
               </div>
             </div>
