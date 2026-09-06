@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { ProjectCard } from '@/components/ProjectCard'
 import type { Project } from '@/data/site'
 import { copy, type Locale } from '@/data/i18n'
@@ -17,6 +17,15 @@ export function PortfolioGallery({ projects, lang, initialCategory = '' }: { pro
     { label: t.portfolio.bathrooms, slug: 'bathrooms' },
   ]
   const visibleProjects = useMemo(() => category ? projects.filter((project) => project.categorySlug === category) : projects, [category, projects])
+
+  useEffect(() => {
+    function onCategoryChange(event: Event) {
+      const customEvent = event as CustomEvent<{ category?: string }>
+      setCategory(customEvent.detail?.category ?? '')
+    }
+    window.addEventListener('portfolio-category-change', onCategoryChange)
+    return () => window.removeEventListener('portfolio-category-change', onCategoryChange)
+  }, [])
 
   function selectCategory(slug: string) {
     setCategory(slug)
