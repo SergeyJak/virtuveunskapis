@@ -49,10 +49,11 @@ export default async function ProjectPage({ params, searchParams }: { params: Pr
   const t = copy[lang]
   const localized = translations[lang][slug]
   const title = localized?.title ?? project.title
+  const portfolioHref = `${withLocale(`/portfolio?category=${project.categorySlug}`, lang)}#project-${project.slug}`
 
   return <main id="main-content" className={styles.page}>
     <div className={styles.topbar}>
-      <Link className={styles.back} href={withLocale(`/portfolio?category=${project.categorySlug}`, lang)}>{t.project.back}</Link>
+      <Link className={styles.back} href={portfolioHref}>{t.project.back}</Link>
     </div>
     <section className={styles.gallery} aria-label="Project gallery">
       {project.images.map((image, index) => <div className={styles.photo} key={image}>
