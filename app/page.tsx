@@ -5,12 +5,36 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ProjectCard } from '@/components/ProjectCard'
 import { projects } from '@/data/site'
+import styles from './materials.module.css'
 
 const homeCategories = [
   { title: 'Virtuves', href: '/portfolio?category=kitchens', image: '/images/categories/kitchens.jpg' },
   { title: 'Skapji', href: '/portfolio?category=wardrobes', image: '/images/categories/wardrobes.jpg' },
   { title: 'Vannas istabas', href: '/portfolio?category=bathrooms', image: '/images/categories/bathrooms.jpg' },
   { title: 'Citas mēbeles', href: '/portfolio?category=tv-units', image: '/images/categories/tv-units.jpg' },
+]
+
+const benefits = [
+  {
+    icon: DraftingCompass,
+    title: 'Individuāls dizains',
+    description: 'Risinājumi tiek pielāgoti telpai, ikdienai un jūsu vizuālajai iecerei.',
+  },
+  {
+    icon: Sparkles,
+    title: 'Kvalitatīvi materiāli',
+    description: 'Izvēlamies uzticamus materiālus un furnitūru, kas paredzēta ilgstošai lietošanai.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Uzticama garantija',
+    description: 'Uzņemamies atbildību par rezultātu no pirmās skices līdz gatavai montāžai.',
+  },
+  {
+    icon: Timer,
+    title: 'Precīzi termiņi',
+    description: 'Saskaņojam darbu etapus iepriekš un skaidri informējam par projekta virzību.',
+  },
 ]
 
 export default function HomePage() {
@@ -70,18 +94,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="materials" className="trust-band">
-        <div className="container trust-grid">
-          <div>
-            <h2>Īstenosim jūsu idejas kopā</h2>
-            <p>Katrs projekts sākas ar sarunu. Pastāstiet par savu ieceri, un mēs palīdzēsim atrast piemērotu risinājumu.</p>
-            <Link className="button button-primary" href="/contacts">Sazināties ar mums</Link>
+      <section id="materials" className={styles.section}>
+        <div className={`container ${styles.inner}`}>
+          <div className={styles.copy}>
+            <p className={styles.eyebrow}>Kvalitāte detaļās</p>
+            <h2>Materiāli un izpildījums, kam var uzticēties</h2>
+            <p>Labs rezultāts nav tikai skaists skats. Tas ir pārdomāts dizains, kvalitatīvi materiāli un precīzs darbs katrā projekta posmā.</p>
+            <Link className="button button-primary" href="/contacts">Pārrunāt savu projektu <ArrowRight size={18} /></Link>
           </div>
-          <div className="benefits">
-            <div><DraftingCompass/><span>Individuāls dizains</span></div>
-            <div><Sparkles/><span>Kvalitatīvi materiāli</span></div>
-            <div><ShieldCheck/><span>Uzticama garantija</span></div>
-            <div><Timer/><span>Precīzi termiņi</span></div>
+          <div className={styles.grid}>
+            {benefits.map(({ icon: Icon, title, description }) => (
+              <article key={title} className={styles.card}>
+                <Icon aria-hidden="true" />
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
