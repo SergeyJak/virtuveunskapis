@@ -37,7 +37,7 @@ export default async function PortfolioPage({ searchParams }: { searchParams: Pr
           {filters.map((filter) => {
             const active = category === filter.slug || (!category && !filter.slug)
             const href = filter.slug ? `/portfolio?category=${filter.slug}` : '/portfolio'
-            return <Link key={filter.label} href={`${withLocale(href, lang)}#projects`} className={active ? styles.active : undefined}>{filter.label}</Link>
+            return <Link scroll={false} key={filter.label} href={`${withLocale(href, lang)}#projects`} className={active ? styles.active : undefined}>{filter.label}</Link>
           })}
         </nav>
         <div className="project-grid portfolio-grid">{visibleProjects.map(p => <ProjectCard key={p.slug} project={p} lang={lang}/>)}</div>
