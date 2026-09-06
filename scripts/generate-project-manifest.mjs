@@ -31,7 +31,13 @@ async function walk(dir, parts = []) {
       const slug = `${category}-${rawName}`.toLowerCase().replace(/[^a-z0-9āčēģīķļņšūž-]+/gi, '-').replace(/^-|-$/g, '')
       projects.push({ slug, category, sourceName: rawName, images })
     }
+
+    // A folder containing project photos is the project boundary. Nested folders
+    // such as "New folder" are duplicate/export copies and must not become
+    // separate customer-facing projects.
+    return
   }
+
   for (const entry of entries) {
     if (entry.isDirectory()) await walk(path.join(dir, entry.name), [...parts, entry.name])
   }
