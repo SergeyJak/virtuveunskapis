@@ -43,8 +43,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           <p className="small-label">{project.category}</p>
           <h1>{project.title}</h1>
           <div className="project-hero-meta">
-            <span>{project.location}</span>
             <span>{project.category}</span>
+            <span>Individuāls pasūtījums</span>
           </div>
           <p className="lead">{project.description}</p>
           <Link className="button button-primary project-hero-cta" href="/contacts">Apspriest projektu</Link>
@@ -54,14 +54,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <div className="container project-content">
         <section className="project-details">
           <div className="project-details-panel">
-            <p className="small-label">Materiāli</p>
-            <h2>Materiāli un furnitūra</h2>
-            <ul>{project.materials.map(m => <li key={m}>{m}</li>)}</ul>
+            <p className="small-label">Pielāgošana</p>
+            <h2>Pēc jūsu telpas izmēriem</h2>
+            <p>Izgatavojam mēbeles pēc individuāliem izmēriem, pielāgojot risinājumu konkrētam plānojumam un klienta vēlmēm.</p>
           </div>
           <div className="project-details-panel">
-            <p className="small-label">Pieeja</p>
-            <h2>Par projektu</h2>
-            <p>Katrs risinājums tiek pielāgots konkrētai telpai, ikdienas paradumiem un izvēlētajiem materiāliem.</p>
+            <p className="small-label">Izpildījums</p>
+            <h2>No mērīšanas līdz uzstādīšanai</h2>
+            <p>Pasūtījumu uzraugām visos posmos un darbus veicam paši, izmantojot savu ražotni un profesionālu galdnieku komandu.</p>
           </div>
         </section>
 
@@ -78,7 +78,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <section className="project-cta">
           <p className="small-label">Nākamais solis</p>
           <h2>Vai vēlaties līdzīgu risinājumu?</h2>
-          <p>Pastāstiet par telpu, materiāliem un sajūtu, ko vēlaties panākt. Mēs palīdzēsim pārvērst to skaidrā projektā.</p>
+          <p>Pastāstiet par telpu un ieceri. Mēs palīdzēsim sagatavot risinājumu, kas pielāgots jūsu izmēriem un vajadzībām.</p>
           <Link className="button button-primary" href="/contacts">Apspriest projektu</Link>
         </section>
       </div>
