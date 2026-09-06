@@ -25,7 +25,7 @@ export function ProjectCard({ project, lang = 'lv' }: { project: Project; lang?:
   const category = localized?.category ?? project.category
   const description = localized?.description ?? project.description
   return (
-    <Link href={withLocale(`/projects/${project.slug}`, lang)} className="project-card">
+    <Link id={`project-${project.slug}`} style={{ scrollMarginTop: '120px' }} href={withLocale(`/projects/${project.slug}`, lang)} className="project-card">
       <div className="project-image"><Image src={project.cover} alt={title} fill sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" /></div>
       <div className="project-meta"><div><p className="project-card-category">{category}</p><h3>{title}</h3><p className="project-card-description">{description}</p></div><span aria-hidden>→</span></div>
     </Link>
