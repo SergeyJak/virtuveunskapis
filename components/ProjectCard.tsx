@@ -6,7 +6,7 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <Link href={`/projects/${project.slug}`} className="project-card">
       <div className="project-image">
-        <Image src={project.cover} alt={project.title} fill sizes="(max-width: 760px) 100vw, 33vw" />
+        <Image src={project.cover} alt={project.title} fill sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" />
       </div>
       <div className="project-meta">
         <div>

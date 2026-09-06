@@ -45,7 +45,7 @@ export default function HomePage() {
         <Header />
         <main>
           <section className="hero">
-            <Image className="hero-image" src="/images/hero.jpg" alt="Individuāli projektēta tumša virtuve" fill priority sizes="100vw" unoptimized />
+            <Image className="hero-image" src="/images/hero.jpg" alt="Individuāli projektēta tumša virtuve" fill priority sizes="100vw" />
             <div className="hero-shade hero-shade-home" />
             <div className="container hero-content">
               <h1>Mēbeles,<br />ko vēlaties katru<br />dienu redzēt mājās</h1>
@@ -83,7 +83,7 @@ export default function HomePage() {
           <div className="category-grid">
             {homeCategories.map((category) => (
               <Link key={category.title} className="category-card" href={category.href}>
-                <Image src={category.image} alt={category.title} fill sizes="(max-width: 760px) 100vw, 25vw" />
+                <Image src={category.image} alt={category.title} fill sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 25vw" />
                 <div className="category-overlay"><h3>{category.title}</h3><span>→</span></div>
               </Link>
             ))}
