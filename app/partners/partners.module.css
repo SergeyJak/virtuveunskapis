@@ -1,0 +1,160 @@
+.page {
+  min-height: 100vh;
+  background: #0d0c0a;
+  color: #fff;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 96px 0 72px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  background:
+    radial-gradient(circle at 80% 20%, rgba(182,141,84,.16), transparent 34%),
+    linear-gradient(180deg, rgba(255,255,255,.02), transparent);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 110px 110px;
+}
+
+.heroInner,
+.partners {
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  margin: 0 0 16px;
+  color: #d4ad75;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  max-width: 760px;
+  font-size: clamp(44px, 7vw, 84px);
+  line-height: .98;
+  letter-spacing: -.035em;
+}
+
+.lead {
+  margin: 28px 0 0;
+  max-width: 680px;
+  color: rgba(255,255,255,.62);
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.6;
+}
+
+.partners {
+  padding: 70px 0 92px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 24px;
+}
+
+.card {
+  position: relative;
+  min-height: 330px;
+  padding: 34px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.015));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.cardAccent {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 96px;
+  height: 1px;
+  background: #d4ad75;
+}
+
+.logoNoer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(46px, 7vw, 68px);
+  font-weight: 800;
+  letter-spacing: -.06em;
+  color: #d7dde0;
+}
+
+.logoNoer::before {
+  content: '';
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #ef2d24;
+  box-shadow: inset -10px -8px 0 rgba(0,0,0,.08);
+}
+
+.logoHeySmart {
+  display: inline-block;
+  font-size: clamp(42px, 6vw, 62px);
+  font-weight: 750;
+  letter-spacing: -.045em;
+  color: #fff;
+}
+
+.logoHeySmart span {
+  color: #d4ad75;
+}
+
+.meta {
+  display: grid;
+  gap: 10px;
+}
+
+.meta h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.meta p {
+  margin: 0;
+  color: rgba(255,255,255,.58);
+  line-height: 1.6;
+}
+
+.external {
+  width: fit-content;
+  margin-top: 8px;
+  color: #d4ad75;
+  font-weight: 650;
+}
+
+@media (max-width: 760px) {
+  .hero {
+    padding: 76px 0 56px;
+  }
+
+  .partners {
+    padding: 48px 0 68px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    min-height: 280px;
+    padding: 26px;
+  }
+}
