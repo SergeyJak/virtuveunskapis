@@ -1,0 +1,85 @@
+name: Crawl old site media
+
+on:
+  push:
+    branches: [chore/import-old-media]
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Crawl old Virtuve un Skapis site
+        run: |
+          python - <<'PY'
+          import os, re, urllib.parse, urllib.request, pathlib, html
+          from collections import deque
+
+          base = 'https://virtuveunskapis.lv'
+          seeds = ['/', '/mkl', '/closetl', '/bathl', '/ru']
+          seen = set()
+          queue = deque((urllib.parse.urljoin(base, p), 0) for p in seeds)
+          image_urls = set()
+          pages = []
+
+          def get(url):
+              req = urllib.request.Request(url, headers={'User-Agent':'Mozilla/5.0'})
+              with urllib.request.urlopen(req, timeout=20) as r:
+                  return r.read().decode('utf-8', 'ignore')
+
+          while queue and len(seen) < 80:
+              url, depth = queue.popleft()
+              if url in seen or urllib.parse.urlparse(url).netloc != 'virtuveunskapis.lv':
+                  continue
+              seen.add(url)
+              try:
+                  text = get(url)
+              except Exception as e:
+                  print('PAGE_FAIL', url, repr(e))
+                  continue
+              pages.append(url)
+              print('PAGE', url, len(text))
+
+              candidates = re.findall(r'''(?:src|href|data-original|data-src|data-bg|data-lazy-rule|data-original-src)=["']([^"']+)["']''', text, re.I)
+              candidates += re.findall(r'''https?://[^\s"'<>]+''', text)
+              for raw in candidates:
+                  raw = html.unescape(raw).strip()
+                  if raw.startswith('//'): raw = 'https:' + raw
+                  absolute = urllib.parse.urljoin(url, raw)
+                  parsed = urllib.parse.urlparse(absolute)
+                  path = parsed.path.lower()
+                  if any(ext in path for ext in ('.jpg','.jpeg','.png','.webp','.avif')) or 'tildacdn' in parsed.netloc or 'tilda' in parsed.netloc and 'img' in path:
+                      image_urls.add(absolute)
+                  if depth < 2 and parsed.netloc == 'virtuveunskapis.lv' and not any(path.endswith(ext) for ext in ('.jpg','.jpeg','.png','.webp','.pdf','.svg')):
+                      queue.append((urllib.parse.urlunparse((parsed.scheme, parsed.netloc, parsed.path, '', parsed.query, '')), depth + 1))
+
+          pathlib.Path('old-media').mkdir(exist_ok=True)
+          (pathlib.Path('old-media')/'pages.txt').write_text('\n'.join(pages), encoding='utf-8')
+          (pathlib.Path('old-media')/'image-urls.txt').write_text('\n'.join(sorted(image_urls)), encoding='utf-8')
+          print('IMAGES_FOUND', len(image_urls))
+
+          downloaded = 0
+          for i, url in enumerate(sorted(image_urls)):
+              if downloaded >= 120: break
+              try:
+                  req = urllib.request.Request(url, headers={'User-Agent':'Mozilla/5.0','Referer':base+'/'})
+                  with urllib.request.urlopen(req, timeout=20) as r:
+                      data = r.read()
+                      ctype = r.headers.get_content_type()
+                  if len(data) < 15000 or not ctype.startswith('image/'):
+                      continue
+                  ext = {'image/jpeg':'.jpg','image/png':'.png','image/webp':'.webp','image/avif':'.avif'}.get(ctype, pathlib.Path(urllib.parse.urlparse(url).path).suffix or '.img')
+                  name = f'{downloaded:03d}{ext}'
+                  (pathlib.Path('old-media')/name).write_bytes(data)
+                  downloaded += 1
+                  print('DOWNLOADED', name, len(data), url)
+              except Exception as e:
+                  print('IMG_FAIL', url, repr(e))
+          print('DOWNLOADED_TOTAL', downloaded)
+          PY
+      - name: Upload crawled media
+        uses: actions/upload-artifact@v4
+        with:
+          name: old-site-media
+          path: old-media
+          retention-days: 1
