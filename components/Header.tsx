@@ -12,7 +12,8 @@ export function Header({ lang = 'lv' }: { lang?: Locale }) {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
   const t = copy[lang]
-  const labels: Record<string, string> = { Projekti:t.nav.projects, Virtuves:t.nav.kitchens, Skapji:t.nav.wardrobes, Materiāli:t.nav.materials, 'Par mums':t.nav.about }
+  const partnerLabel = lang === 'ru' ? 'Партнёры' : lang === 'en' ? 'Partners' : 'Partneri'
+  const labels: Record<string, string> = { Projekti:t.nav.projects, Virtuves:t.nav.kitchens, Skapji:t.nav.wardrobes, Materiāli:t.nav.materials, 'Par mums':t.nav.about, Partneri:partnerLabel }
   const headerNavigation = navigation.filter((item) => item.href !== '/contacts')
   const localize = (href: string) => {
     const [base, hash] = href.split('#')
@@ -30,7 +31,7 @@ export function Header({ lang = 'lv' }: { lang?: Locale }) {
   }, [open])
   useEffect(() => { setOpen(false) }, [pathname])
 
-  const isActive = (href: string) => href === '/portfolio' && (pathname === '/portfolio' || pathname.startsWith('/projects/'))
+  const isActive = (href: string) => (href === '/portfolio' && (pathname === '/portfolio' || pathname.startsWith('/projects/'))) || (href === '/partners' && pathname === '/partners')
   const localeHref = (locale: Locale) => locale === 'lv' ? pathname : `${pathname}?lang=${locale}`
   const languages = <>{(['lv','ru','en'] as Locale[]).map((locale) => <Link key={locale} href={localeHref(locale)} className={lang === locale ? styles.languageActive : styles.language} aria-current={lang === locale ? 'page' : undefined}>{locale.toUpperCase()}</Link>)}</>
 

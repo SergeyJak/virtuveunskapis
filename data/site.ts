@@ -6,6 +6,7 @@ export const navigation = [
   { label: 'Skapji', href: '/portfolio?category=wardrobes' },
   { label: 'Materiāli', href: '/#materials' },
   { label: 'Par mums', href: '/#about' },
+  { label: 'Partneri', href: '/partners' },
   { label: 'Kontakti', href: '/contacts' },
 ]
 
