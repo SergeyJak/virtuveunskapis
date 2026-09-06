@@ -2,45 +2,112 @@
 
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { navigation } from '@/data/site'
+import styles from './Header.module.css'
 
 export function Header() {
   const [open, setOpen] = useState(false)
-  const headerNavigation = navigation.filter((item) => item.href !== '/contacts')
+  const pathname = usePathname()
+  const headerNavigation = navigation.filter(
+    (item) => item.href !== '/contacts' && item.href !== '/#about'
+  )
+
+  useEffect(() => {
+    if (!open) return
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false)
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [open])
+
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname])
+
+  const isActive = (href: string) => {
+    if (href === '/portfolio') return pathname === '/portfolio' || pathname.startsWith('/projects/')
+    return false
+  }
 
   return (
-    <header className="site-header">
-      <div className="container header-inner">
-        <Link href="/" className="brand" aria-label="Virtuve un skapis">
-          <img src="/logo/logo-original.png" alt="Virtuve un skapis" width={433} height={160} />
+    <header className={styles.header}>
+      <div className={`container ${styles.inner}`}>
+        <Link href="/" className={styles.brand} aria-label="Virtuve un Skapis sākumlapa">
+          <img src="/logo/logo-original.png" alt="Virtuve un Skapis" width={433} height={160} />
         </Link>
-        <nav className="desktop-nav" aria-label="Galvenā navigācija">
-          {headerNavigation.map((item) => <Link key={item.href + item.label} href={item.href}>{item.label}</Link>)}
+
+        <nav className={styles.desktopNav} aria-label="Galvenā navigācija">
+          {headerNavigation.map((item) => (
+            <Link
+              key={item.href + item.label}
+              href={item.href}
+              className={`${styles.navLink} ${isActive(item.href) ? styles.navLinkActive : ''}`}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
-        <div className="header-actions">
-          <div className="language-switcher" aria-label="Valodas izvēle">
-            <Link href="/" aria-current="page">LV</Link>
-            <Link href="/" aria-disabled="true">RU</Link>
-            <Link href="/" aria-disabled="true">EN</Link>
+
+        <div className={styles.actions}>
+          <div className={styles.languages} aria-label="Valodas izvēle">
+            <span className={styles.languageActive}>LV</span>
+            <span className={styles.language} aria-disabled="true">RU</span>
+            <span className={styles.language} aria-disabled="true">EN</span>
           </div>
-          <Link className="button button-primary desktop-cta" href="/contacts">Sazināties</Link>
-          <button className="menu-button" onClick={() => setOpen(!open)} aria-label="Atvērt izvēlni" aria-expanded={open}>
-            {open ? <X /> : <Menu />}
+          <Link className={styles.cta} href="/contacts">Sazināties</Link>
+          <button
+            className={styles.menuButton}
+            type="button"
+            onClick={() => setOpen((value) => !value)}
+            aria-label={open ? 'Aizvērt izvēlni' : 'Atvērt izvēlni'}
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
+          >
+            {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
           </button>
         </div>
       </div>
+
       {open && (
-        <div className="mobile-nav-overlay" onClick={() => setOpen(false)}>
-          <nav className="mobile-nav" aria-label="Mobilā navigācija" onClick={(event) => event.stopPropagation()}>
-            {headerNavigation.map((item) => <Link onClick={() => setOpen(false)} key={item.href + item.label} href={item.href}>{item.label}</Link>)}
-            <div className="mobile-language-switcher" aria-label="Valodas izvēle">
-              <Link href="/" aria-current="page">LV</Link>
-              <Link href="/" aria-disabled="true">RU</Link>
-              <Link href="/" aria-disabled="true">EN</Link>
+        <div className={styles.overlay}>
+          <div className={styles.mobilePanel}>
+            <nav id="mobile-navigation" className={styles.mobileNav} aria-label="Mobilā navigācija">
+              {headerNavigation.map((item) => (
+                <Link
+                  onClick={() => setOpen(false)}
+                  key={item.href + item.label}
+                  href={item.href}
+                  className={`${styles.mobileLink} ${isActive(item.href) ? styles.mobileLinkActive : ''}`}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+
+            <div className={styles.mobileBottom}>
+              <div className={styles.mobileLanguages} aria-label="Valodas izvēle">
+                <span className={styles.languageActive}>LV</span>
+                <span className={styles.language} aria-disabled="true">RU</span>
+                <span className={styles.language} aria-disabled="true">EN</span>
+              </div>
+              <Link onClick={() => setOpen(false)} className={styles.mobileCta} href="/contacts">
+                Sazināties
+              </Link>
             </div>
-            <Link onClick={() => setOpen(false)} className="button button-primary" href="/contacts">Sazināties</Link>
-          </nav>
+          </div>
         </div>
       )}
     </header>
