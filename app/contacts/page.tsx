@@ -82,6 +82,7 @@ export default function ContactsPage() {
         font-size: clamp(58px, 7.2vw, 108px);
         line-height: .95;
         letter-spacing: -.055em;
+        overflow-wrap: anywhere;
       }
       .contact-premium-copy .lead {
         max-width: 650px;
@@ -136,6 +137,7 @@ export default function ContactsPage() {
         font-size: clamp(38px, 4vw, 60px);
         line-height: 1;
         letter-spacing: -.045em;
+        overflow-wrap: anywhere;
       }
       .contact-form-heading p:not(.small-label) {
         max-width: 420px;
@@ -145,12 +147,14 @@ export default function ContactsPage() {
         line-height: 1.65;
       }
       .contact-page-premium .contact-form {
+        min-width: 0;
         padding: 0;
         gap: 22px;
         border: 0;
         background: transparent;
       }
       .contact-page-premium .contact-form label {
+        min-width: 0;
         gap: 9px;
         color: #2a2824;
         font-size: 14px;
@@ -158,6 +162,9 @@ export default function ContactsPage() {
       .contact-page-premium .contact-form input,
       .contact-page-premium .contact-form textarea,
       .contact-page-premium .contact-form select {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
         min-height: 54px;
         padding: 15px 16px;
         border: 1px solid rgba(31,28,24,.16);
@@ -205,15 +212,16 @@ export default function ContactsPage() {
           padding: 70px 0 78px;
         }
         .contact-premium-intro { gap: 38px; padding-bottom: 42px; }
-        .contact-premium-copy h1 { margin-top: 10px; font-size: 52px; }
+        .contact-premium-copy h1 { margin-top: 10px; font-size: clamp(42px, 13vw, 52px); }
         .contact-premium-copy .lead { font-size: 18px; line-height: 1.6; }
         .contact-detail { padding: 18px 0; }
         .contact-detail strong { font-size: 20px; overflow-wrap: anywhere; }
         .contact-premium-form-wrap { gap: 32px; padding: 28px 20px; }
-        .contact-form-heading h2 { font-size: 40px; }
+        .contact-form-heading h2 { font-size: clamp(36px, 11vw, 40px); }
         .contact-form-heading p:not(.small-label) { font-size: 16px; }
         .contact-page-premium .contact-form { padding: 0; }
         .contact-page-premium .contact-form .button { width: 100%; }
+        .contact-page-premium .form-success { padding: 30px 22px; }
       }
     `}</style>
   </>
