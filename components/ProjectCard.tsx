@@ -6,16 +6,16 @@ import { type Locale, withLocale } from '@/data/i18n'
 const translations: Record<Locale, Record<string, { title: string; category: string; description: string }>> = {
   lv: {},
   ru: {
-    '467-serijas-virtuve': { title: 'Кухня для 467 серии', category: 'Кухни', description: 'Кухонное решение для типовой планировки 467 серии с изготовлением по индивидуальным размерам.' },
-    '602-serijas-virtuve': { title: 'Кухня для 602 серии', category: 'Кухни', description: 'Кухонное решение для планировки 602 серии, адаптированное под конкретное помещение.' },
-    'individuals-virtuves-projekts': { title: 'Индивидуальный проект кухни', category: 'Кухни', description: 'Кухня, изготовленная по индивидуальным размерам и пожеланиям заказчика.' },
-    'vannas-istabas-mebeles': { title: 'Мебель для ванной', category: 'Ванные комнаты', description: 'Индивидуальное мебельное решение для ванной комнаты.' },
+    'virtuve-467-serija': { title: 'Кухня для 467 серии', category: 'Кухни', description: 'Индивидуально адаптированное кухонное решение для планировки 467 серии.' },
+    'virtuve-602-serija': { title: 'Кухня для 602 серии', category: 'Кухни', description: 'Кухонное решение для дома 602 серии, адаптированное под размеры конкретного помещения.' },
+    'virtuve-individuals-projekts': { title: 'Кухня по индивидуальному проекту', category: 'Кухни', description: 'Кухня по индивидуальным размерам и идее заказчика, от проекта до установки.' },
+    'vannas-istabas-mebeles': { title: 'Мебель для ванной', category: 'Ванные комнаты', description: 'Мебель, изготовленная по индивидуальным размерам и потребностям конкретного помещения.' },
   },
   en: {
-    '467-serijas-virtuve': { title: 'Kitchen for a 467-series apartment', category: 'Kitchens', description: 'A kitchen solution for the standard 467-series layout, made to individual dimensions.' },
-    '602-serijas-virtuve': { title: 'Kitchen for a 602-series apartment', category: 'Kitchens', description: 'A kitchen solution for the 602-series layout, adapted to the specific room.' },
-    'individuals-virtuves-projekts': { title: 'Custom kitchen project', category: 'Kitchens', description: 'A kitchen made to individual dimensions and customer preferences.' },
-    'vannas-istabas-mebeles': { title: 'Bathroom furniture', category: 'Bathrooms', description: 'A custom-made furniture solution for a bathroom.' },
+    'virtuve-467-serija': { title: 'Kitchen for a 467-series apartment', category: 'Kitchens', description: 'A custom kitchen solution adapted to a 467-series layout.' },
+    'virtuve-602-serija': { title: 'Kitchen for a 602-series apartment', category: 'Kitchens', description: 'A kitchen solution for a 602-series home, adapted to the dimensions of the room.' },
+    'virtuve-individuals-projekts': { title: 'Custom kitchen project', category: 'Kitchens', description: 'A kitchen made to individual dimensions and customer ideas, from design to installation.' },
+    'vannas-istabas-mebeles': { title: 'Bathroom furniture', category: 'Bathrooms', description: 'Furniture made to individual dimensions and the needs of the specific room.' },
   },
 }
 
