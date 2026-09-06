@@ -23,7 +23,7 @@ export function ContactForm() {
       phone: String(data.get('phone') || '').trim(),
       type: String(data.get('type') || '').trim(),
       message: String(data.get('message') || '').trim(),
-      _subject: 'Jauns pieteikums no virtúveunskapis.lv',
+      _subject: 'Jauns pieteikums no virtuveunskapis.lv',
       _template: 'table',
       _honey: String(data.get('_honey') || ''),
     }
