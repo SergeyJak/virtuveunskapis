@@ -40,6 +40,7 @@
   line-height: .98;
   letter-spacing: -.052em;
   font-weight: 600;
+  overflow-wrap: anywhere;
 }
 
 .content {
@@ -103,8 +104,8 @@
 @media (max-width: 640px) {
   .section { padding: 72px 0; }
   .inner { gap: 32px; }
-  .title { font-size: 48px; }
-  .lead { font-size: 22px; }
+  .title { font-size: clamp(40px, 12vw, 48px); }
+  .lead { font-size: clamp(20px, 6vw, 22px); }
   .text { margin-top: 20px; font-size: 16px; }
   .stats { grid-template-columns: 1fr; margin-top: 34px; }
   .stat { min-height: 0; padding: 22px; }
