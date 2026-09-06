@@ -2,6 +2,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ProjectCard } from '@/components/ProjectCard'
 import { projects } from '@/data/site'
+import styles from './portfolio.module.css'
 
 export const metadata = { title: 'Projekti', description: 'Apskatiet mūsu īstenotos virtuves un mēbeļu projektus.' }
 
@@ -15,7 +16,7 @@ export default function PortfolioPage() {
           <h1>Mūsu projekti</h1>
           <p>Reāli risinājumi dažādām telpām, materiāliem un dzīvesveidam.</p>
         </div>
-        <div className="filter-row portfolio-filters">
+        <div className={`filter-row portfolio-filters ${styles.filters}`}>
           <button className="active">Visi</button>
           <button>Virtuves</button>
           <button>Skapji</button>
