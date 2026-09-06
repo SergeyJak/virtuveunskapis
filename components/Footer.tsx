@@ -15,6 +15,7 @@ export function Footer() {
         <nav className={styles.column} aria-label="Kājenes navigācija">
           <h3 className={styles.heading}>Navigācija</h3>
           <Link className={styles.link} href="/portfolio">Projekti</Link>
+          <Link className={styles.link} href="/#about">Par mums</Link>
           <Link className={styles.link} href="/#materials">Materiāli</Link>
           <Link className={styles.link} href="/contacts">Kontakti</Link>
         </nav>

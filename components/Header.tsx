@@ -10,9 +10,7 @@ import styles from './Header.module.css'
 export function Header() {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
-  const headerNavigation = navigation.filter(
-    (item) => item.href !== '/contacts' && item.href !== '/#about'
-  )
+  const headerNavigation = navigation.filter((item) => item.href !== '/contacts')
 
   useEffect(() => {
     if (!open) return

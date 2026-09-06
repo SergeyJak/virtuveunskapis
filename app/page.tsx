@@ -5,7 +5,8 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ProjectCard } from '@/components/ProjectCard'
 import { projects } from '@/data/site'
-import styles from './materials.module.css'
+import materialStyles from './materials.module.css'
+import aboutStyles from './about.module.css'
 
 const homeCategories = [
   { title: 'Virtuves', href: '/portfolio?category=kitchens', image: '/images/categories/kitchens.jpg' },
@@ -58,6 +59,24 @@ export default function HomePage() {
         </main>
       </div>
 
+      <section id="about" className={aboutStyles.section}>
+        <div className={`container ${aboutStyles.inner}`}>
+          <div>
+            <p className={aboutStyles.eyebrow}>Par uzņēmumu</p>
+            <h2 className={aboutStyles.title}>Vairāk nekā 20 gadus mēbeļu ražošanā</h2>
+          </div>
+          <div className={aboutStyles.content}>
+            <p className={aboutStyles.lead}>Radām virtuves un citas mēbeles, kur kvalitāte, funkcionalitāte un dizains strādā kopā.</p>
+            <p className={aboutStyles.text}>Mums ir sava moderna ražotne un profesionālu galdnieku komanda. Izgatavojam gan standarta, gan sarežģītus individuālus risinājumus pēc klienta telpas, rasējumiem un vēlmēm, visu darbu veicot paši bez apakšuzņēmējiem.</p>
+            <div className={aboutStyles.stats}>
+              <div className={aboutStyles.stat}><strong>20+ gadi</strong><span>Pieredze mēbeļu ražošanā</span></div>
+              <div className={aboutStyles.stat}><strong>Sava ražotne</strong><span>Ražošanu un kvalitāti kontrolējam paši</span></div>
+              <div className={aboutStyles.stat}><strong>No A līdz Z</strong><span>No mērīšanas līdz gatavai uzstādīšanai</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="section">
         <div className="container">
           <div className="section-heading"><h2>Atrodiet mēbeles savam mājoklim</h2><Link href="/portfolio">Visi projekti →</Link></div>
@@ -94,17 +113,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="materials" className={styles.section}>
-        <div className={`container ${styles.inner}`}>
-          <div className={styles.copy}>
-            <p className={styles.eyebrow}>Kvalitāte detaļās</p>
+      <section id="materials" className={materialStyles.section}>
+        <div className={`container ${materialStyles.inner}`}>
+          <div className={materialStyles.copy}>
+            <p className={materialStyles.eyebrow}>Kvalitāte detaļās</p>
             <h2>Materiāli un izpildījums, kam var uzticēties</h2>
             <p>Labs rezultāts nav tikai skaists skats. Tas ir pārdomāts dizains, kvalitatīvi materiāli un precīzs darbs katrā projekta posmā.</p>
             <Link className="button button-primary" href="/contacts">Pārrunāt savu projektu <ArrowRight size={18} /></Link>
           </div>
-          <div className={styles.grid}>
+          <div className={materialStyles.grid}>
             {benefits.map(({ icon: Icon, title, description }) => (
-              <article key={title} className={styles.card}>
+              <article key={title} className={materialStyles.card}>
                 <Icon aria-hidden="true" />
                 <h3>{title}</h3>
                 <p>{description}</p>
