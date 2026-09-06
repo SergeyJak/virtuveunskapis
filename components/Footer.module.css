@@ -1,0 +1,159 @@
+.footer {
+  position: relative;
+  overflow: hidden;
+  background: #0d0c0a;
+  color: #fff;
+  padding: 82px 0 26px;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 82% 8%, rgba(182,141,84,.14), transparent 32%),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: auto, 110px 110px;
+}
+
+.grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.35fr .72fr .9fr;
+  gap: 72px;
+}
+
+.brandBlock {
+  display: grid;
+  align-content: start;
+  gap: 24px;
+  max-width: 430px;
+}
+
+.logo {
+  width: 230px;
+  height: auto;
+  object-fit: contain;
+}
+
+.brandText {
+  margin: 0;
+  max-width: 360px;
+  color: rgba(255,255,255,.58);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.column {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.heading {
+  margin: 0 0 12px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.link,
+.text {
+  color: rgba(255,255,255,.58);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.link {
+  width: fit-content;
+  transition: color .2s ease, transform .2s ease;
+}
+
+.link:hover {
+  color: #d4ad75;
+  transform: translateX(2px);
+}
+
+.contactLink {
+  color: rgba(255,255,255,.78);
+  font-size: 17px;
+}
+
+.bottom {
+  position: relative;
+  z-index: 1;
+  margin-top: 68px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255,255,255,.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  color: rgba(255,255,255,.38);
+  font-size: 12px;
+}
+
+.bottomAccent {
+  color: rgba(212,173,117,.72);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 50px 36px;
+  }
+
+  .brandBlock {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding: 64px 0 22px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+
+  .brandBlock {
+    grid-column: auto;
+    gap: 22px;
+  }
+
+  .logo {
+    width: 220px;
+  }
+
+  .brandText {
+    font-size: 15px;
+  }
+
+  .heading {
+    margin-bottom: 8px;
+  }
+
+  .link,
+  .text {
+    font-size: 16px;
+  }
+
+  .bottom {
+    margin-top: 52px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link {
+    transition: none;
+  }
+}
