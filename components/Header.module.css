@@ -120,6 +120,12 @@
 .mobileLink::after { content: '↗'; color: #d4ad75; font-size: 20px; font-weight: 400; }
 .mobileLinkActive { color: #fff; }
 .mobileBottom { margin-top: auto; padding-top: 38px; display: grid; gap: 22px; }
+.quickContacts { display: flex; align-items: center; gap: 14px; }
+.quickContact { width: 54px; height: 54px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid rgba(212,173,117,.58); border-radius: 50%; background: rgba(212,173,117,.06); color: #d4ad75; transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease; }
+.quickContact svg { width: 23px; height: 23px; stroke-width: 1.8; fill: none; stroke: currentColor; }
+.quickContact svg path { vector-effect: non-scaling-stroke; }
+.quickContact:last-child svg { fill: currentColor; stroke: none; width: 24px; height: 24px; }
+.quickContact:hover, .quickContact:focus-visible { color: #0d0c0a; background: #d4ad75; border-color: #d4ad75; transform: translateY(-2px); }
 .mobileLanguages { display: flex; gap: 18px; font-size: 13px; font-weight: 700; letter-spacing: .1em; }
 .mobileCta { min-height: 56px; display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(180deg, #d8b173 0%, #b68d54 100%); color: #fff; font-weight: 700; }
 
@@ -144,10 +150,11 @@
   .inner { min-height: 88px; }
   .brand { height: 88px; }
   .brand img { width: 184px; max-width: 58vw; }
-  .mobilePanel { width: calc(100% - 28px); padding-top: 112px; }
+  .mobilePanel { width: calc(100% - 28px); padding-top: 112px; padding-bottom: 28px; }
   .mobileLink { min-height: 64px; font-size: 29px; }
+  .mobileBottom { padding-top: 28px; gap: 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .navLink, .navLink::after, .cta { transition: none; }
+  .navLink, .navLink::after, .cta, .quickContact { transition: none; }
 }
