@@ -7,6 +7,14 @@ export const navigation = [
   { label: 'Kontakti', href: '/contacts' },
 ]
 
+export const businessContacts = {
+  phoneDisplay: '+371 22 323 266',
+  phoneHref: 'tel:+37122323266',
+  email: 'andrej.petjko@gmail.com',
+  emailHref: 'mailto:andrej.petjko@gmail.com',
+  address: 'Latgales iela 322o, Rīga, LV-1063',
+}
+
 export const categories = [
   { slug: 'kitchens', title: 'Virtuves', image: '/images/categories/kitchens.jpg' },
   { slug: 'wardrobes', title: 'Skapji', image: '/images/categories/wardrobes.jpg' },
