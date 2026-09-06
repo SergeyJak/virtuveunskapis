@@ -8,17 +8,18 @@ import styles from './portfolio.module.css'
 
 export const metadata = { title: 'Projekti', description: 'Apskatiet Virtuve un Skapis mēbeļu risinājumu piemērus.' }
 
-const categoryBySlug: Record<string, string> = { kitchens: 'Virtuves', bathrooms: 'Vannas istabas' }
-
 export default async function PortfolioPage({ searchParams }: { searchParams: Promise<{ category?: string; lang?: string }> }) {
   const { category = '', lang: rawLang } = await searchParams
   const lang = normalizeLocale(rawLang)
   const t = copy[lang]
-  const selectedCategory = categoryBySlug[category]
-  const visibleProjects = selectedCategory ? projects.filter((project) => project.category === selectedCategory) : projects
+  const visibleProjects = category ? projects.filter((project) => project.categorySlug === category) : projects
+  const labels = {
+    lv: { wardrobes: 'Skapji' }, ru: { wardrobes: 'Шкафы' }, en: { wardrobes: 'Wardrobes' },
+  }
   const filters = [
     { label: t.portfolio.all, slug: '' },
     { label: t.portfolio.kitchens, slug: 'kitchens' },
+    { label: labels[lang].wardrobes, slug: 'wardrobes' },
     { label: t.portfolio.bathrooms, slug: 'bathrooms' },
   ]
 
