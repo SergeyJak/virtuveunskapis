@@ -32,7 +32,17 @@
   max-width: 430px;
 }
 
+.logoPlate {
+  width: fit-content;
+  padding: 14px 18px;
+  border: 1px solid rgba(212,173,117,.28);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(246,239,228,.96), rgba(229,214,193,.92));
+  box-shadow: 0 16px 40px rgba(0,0,0,.22);
+}
+
 .logo {
+  display: block;
   width: 230px;
   height: auto;
   object-fit: contain;
@@ -127,8 +137,13 @@
     gap: 22px;
   }
 
+  .logoPlate {
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+
   .logo {
-    width: 220px;
+    width: 210px;
   }
 
   .brandText {

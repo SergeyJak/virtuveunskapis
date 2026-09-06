@@ -13,7 +13,7 @@ export function Footer({ lang = 'lv' }: { lang?: Locale }) {
   }
   return <footer className={styles.footer}>
     <div className={`container ${styles.grid}`}>
-      <div className={styles.brandBlock}><Image className={styles.logo} src="/logo/logo.svg" alt="Virtuve un Skapis" width={230} height={64} /><p className={styles.brandText}>{t.footer.text}</p></div>
+      <div className={styles.brandBlock}><div className={styles.logoPlate}><Image className={styles.logo} src="/logo/logo.svg" alt="Virtuve un Skapis" width={230} height={64} /></div><p className={styles.brandText}>{t.footer.text}</p></div>
       <nav className={styles.column} aria-label="Footer navigation"><h3 className={styles.heading}>{t.footer.nav}</h3><Link className={styles.link} href={withLocale('/portfolio', lang)}>{t.nav.projects}</Link><Link className={styles.link} href={localize('/#about')}>{t.nav.about}</Link><Link className={styles.link} href={localize('/#materials')}>{t.nav.materials}</Link><Link className={styles.link} href={withLocale('/contacts', lang)}>{t.nav.contacts}</Link></nav>
       <div className={styles.column}><h3 className={styles.heading}>{t.footer.contacts}</h3><a className={`${styles.link} ${styles.contactLink}`} href={businessContacts.phoneHref}>{businessContacts.phoneDisplay}</a><a className={`${styles.link} ${styles.contactLink}`} href={businessContacts.emailHref}>{businessContacts.email}</a><span className={styles.text}>{businessContacts.address}</span></div>
     </div>
