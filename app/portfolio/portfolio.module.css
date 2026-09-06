@@ -1,11 +1,16 @@
-.filters a {
+.filters a,
+.filters button {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0 18px;
   color: var(--muted);
+  font: inherit;
   font-weight: 700;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
 }
 
 .filters .active {
@@ -22,7 +27,8 @@
     padding: 8px;
   }
 
-  .filters a {
+  .filters a,
+  .filters button {
     flex: 0 0 auto;
     min-height: 40px;
     padding: 0 14px;
