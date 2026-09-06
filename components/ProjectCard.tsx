@@ -7,9 +7,16 @@ import { type Locale, withLocale } from '@/data/i18n'
 export function ProjectCard({ project, lang = 'lv' }: { project: Project; lang?: Locale }) {
   const localized = localizeProject(project, lang)
   return (
-    <Link id={`project-${project.slug}`} style={{ scrollMarginTop: '120px' }} href={withLocale(`/projects/${project.slug}`, lang)} className="project-card">
-      <div className="project-image"><Image src={project.cover} alt={localized.title} fill sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" /></div>
-      <div className="project-meta"><div><h3>{localized.title}</h3></div><span aria-hidden>→</span></div>
+    <Link
+      id={`project-${project.slug}`}
+      style={{ scrollMarginTop: '120px' }}
+      href={withLocale(`/projects/${project.slug}`, lang)}
+      className="project-card"
+      aria-label={localized.title}
+    >
+      <div className="project-image">
+        <Image src={project.cover} alt={localized.title} fill sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" />
+      </div>
     </Link>
   )
 }
