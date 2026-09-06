@@ -1,3 +1,5 @@
+import generatedProjects from './generated-projects.json'
+
 export const navigation = [
   { label: 'Projekti', href: '/portfolio' },
   { label: 'Virtuves', href: '/portfolio?category=kitchens' },
@@ -8,56 +10,49 @@ export const navigation = [
 ]
 
 export const businessContacts = {
-  phoneDisplay: '+371 22 323 266',
-  phoneHref: 'tel:+37122323266',
-  email: 'andrej.petjko@gmail.com',
-  emailHref: 'mailto:andrej.petjko@gmail.com',
-  address: 'Latgales iela 322o, Rīga, LV-1063',
+  phoneDisplay: '+371 22 323 266', phoneHref: 'tel:+37122323266', email: 'andrej.petjko@gmail.com', emailHref: 'mailto:andrej.petjko@gmail.com', address: 'Latgales iela 322o, Rīga, LV-1063',
 }
 
 export const categories = [
   { slug: 'kitchens', title: 'Virtuves', image: '/images/categories/kitchens.jpg' },
   { slug: 'wardrobes', title: 'Skapji', image: '/images/categories/wardrobes.jpg' },
-  { slug: 'closets', title: 'Garderobes', image: '/images/categories/closets.jpg' },
   { slug: 'bathrooms', title: 'Vannas istabas', image: '/images/categories/bathrooms.jpg' },
-  { slug: 'tv-units', title: 'TV zonas', image: '/images/categories/tv-units.jpg' },
 ]
 
 export type Project = {
   slug: string
   title: string
   category: string
+  categorySlug: 'kitchens' | 'wardrobes' | 'bathrooms'
   cover: string
   description: string
+  images: string[]
 }
 
-export const projects: Project[] = [
-  {
-    slug: 'virtuve-467-serija',
-    title: 'Virtuve 467. sērijai',
-    category: 'Virtuves',
-    cover: '/images/projects/kitchen-light.jpg',
-    description: 'Individuāli pielāgots virtuves risinājums 467. sērijas plānojumam.',
-  },
-  {
-    slug: 'virtuve-602-serija',
-    title: 'Virtuve 602. sērijai',
-    category: 'Virtuves',
-    cover: '/images/projects/kitchen-island.jpg',
-    description: 'Virtuves risinājums 602. sērijas mājoklim, pielāgojot projektu konkrētās telpas izmēriem.',
-  },
-  {
-    slug: 'virtuve-individuals-projekts',
-    title: 'Virtuve pēc individuāla projekta',
-    category: 'Virtuves',
-    cover: '/images/projects/kitchen-dark.jpg',
-    description: 'Virtuve pēc individuāliem izmēriem un klienta ieceres, no projekta līdz uzstādīšanai.',
-  },
-  {
-    slug: 'vannas-istabas-mebeles',
-    title: 'Vannas istabas mēbeles',
-    category: 'Vannas istabas',
-    cover: '/images/projects/bathroom.jpg',
-    description: 'Individuāli izgatavotas mēbeles, kas pielāgotas konkrētās telpas izmēriem un vajadzībām.',
-  },
-]
+const categoryCopy = {
+  kitchens: { title: 'Virtuve', category: 'Virtuves', description: 'Individuāli izgatavota virtuve pēc konkrētās telpas izmēriem un klienta ieceres.' },
+  wardrobes: { title: 'Skapis', category: 'Skapji', description: 'Pēc individuāliem izmēriem izgatavots skapja risinājums.' },
+  bathrooms: { title: 'Vannas istabas mēbeles', category: 'Vannas istabas', description: 'Pēc individuāliem izmēriem izgatavotas mēbeles vannas istabai.' },
+} as const
+
+function displayName(category: Project['categorySlug'], sourceName: string) {
+  if (category === 'kitchens') {
+    if (sourceName === '467') return 'Virtuve 467. sērijai'
+    if (sourceName === '602') return 'Virtuve 602. sērijai'
+    if (sourceName === 'Лит') return 'Virtuve lietuviešu projektam'
+    if (sourceName === 'Новые') return 'Virtuve jaunam projektam'
+  }
+  if (category === 'wardrobes') return `Skapis ${sourceName.replace(/^skapis-?/i, '')}`
+  if (/Jurmala/i.test(sourceName)) return 'Vannas istabas mēbeles Jūrmalā'
+  return categoryCopy[category].title
+}
+
+export const projects: Project[] = (generatedProjects as Array<{ slug: string; category: Project['categorySlug']; sourceName: string; images: string[] }>).map((project) => ({
+  slug: project.slug,
+  title: displayName(project.category, project.sourceName),
+  category: categoryCopy[project.category].category,
+  categorySlug: project.category,
+  cover: project.images[0],
+  description: categoryCopy[project.category].description,
+  images: project.images,
+}))
