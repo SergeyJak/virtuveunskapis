@@ -1,6 +1,7 @@
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ContactForm } from '@/components/ContactForm'
+import { businessContacts } from '@/data/site'
 
 export const metadata = { title: 'Kontakti', description: 'Sazinieties ar Virtuve un Skapis par individuālu mēbeļu projektu.' }
 
@@ -17,17 +18,17 @@ export default function ContactsPage() {
           </div>
 
           <div className="contact-premium-details">
-            <a className="contact-detail" href="tel:+37125123456">
+            <a className="contact-detail" href={businessContacts.phoneHref}>
               <span className="contact-detail-label">Tālrunis</span>
-              <strong>+371 25 123 456</strong>
+              <strong>{businessContacts.phoneDisplay}</strong>
             </a>
-            <a className="contact-detail" href="mailto:info@virtuveunskapis.lv">
+            <a className="contact-detail" href={businessContacts.emailHref}>
               <span className="contact-detail-label">E-pasts</span>
-              <strong>info@virtuveunskapis.lv</strong>
+              <strong>{businessContacts.email}</strong>
             </a>
             <div className="contact-detail">
               <span className="contact-detail-label">Atrašanās vieta</span>
-              <strong>Rīga, Latvija</strong>
+              <strong>{businessContacts.address}</strong>
             </div>
           </div>
         </section>
