@@ -127,7 +127,6 @@
 .quickContact:last-child svg { fill: currentColor; stroke: none; width: 24px; height: 24px; }
 .quickContact:hover, .quickContact:focus-visible { color: #0d0c0a; background: #d4ad75; border-color: #d4ad75; transform: translateY(-2px); }
 .mobileLanguages { display: flex; gap: 18px; font-size: 13px; font-weight: 700; letter-spacing: .1em; }
-.mobileCta { min-height: 56px; display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(180deg, #d8b173 0%, #b68d54 100%); color: #fff; font-weight: 700; }
 
 @media (max-width: 1120px) {
   .desktopNav { gap: 14px; }
