@@ -2,10 +2,9 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { Header } from '@/components/Header'
-import { Footer } from '@/components/Footer'
 import { projects } from '@/data/site'
 import { copy, normalizeLocale, withLocale, type Locale } from '@/data/i18n'
+import styles from './project-photo.module.css'
 
 const translations: Record<Locale, Record<string, { title: string; category: string; description: string }>> = {
   lv: {},
@@ -43,45 +42,22 @@ export async function generateMetadata({ params, searchParams }: { params: Promi
 
 export default async function ProjectPage({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams: Promise<{ lang?: string }> }) {
   const [{ slug }, { lang: rawLang }] = await Promise.all([params, searchParams])
-  const project = projects.find(p => p.slug === slug)
+  const project = projects.find((item) => item.slug === slug)
   if (!project) notFound()
+
   const lang = normalizeLocale(rawLang)
   const t = copy[lang]
   const localized = translations[lang][slug]
   const title = localized?.title ?? project.title
-  const category = localized?.category ?? project.category
-  const description = localized?.description ?? project.description
-  const gallery = project.images.slice(0, 3)
 
-  return <>
-    <div className="dark-header"><Header lang={lang} /></div>
-    <main id="main-content" className="project-page">
-      <section className="project-hero">
-        <Image className="project-hero-bg" src={project.cover} alt={title} fill priority sizes="100vw" />
-        <div className="project-hero-shade" />
-        <div className="container project-hero-content">
-          <Link className="back-link" href={`${withLocale(`/portfolio?category=${project.categorySlug}`, lang)}#projects`}>{t.project.back}</Link>
-          <p className="small-label">{category}</p>
-          <h1>{title}</h1>
-          <div className="project-hero-meta"><span>{category}</span><span>{t.project.custom}</span></div>
-          <p className="lead">{description}</p>
-          <Link className="button button-primary project-hero-cta" href={withLocale('/contacts', lang)}>{t.project.discuss}</Link>
-        </div>
-      </section>
-      <div className="container project-content">
-        <section className="project-details">
-          <div className="project-details-panel"><p className="small-label">{t.project.fitEyebrow}</p><h2>{t.project.fitTitle}</h2><p>{t.project.fitText}</p></div>
-          <div className="project-details-panel"><p className="small-label">{t.project.executionEyebrow}</p><h2>{t.project.executionTitle}</h2><p>{t.project.executionText}</p></div>
-        </section>
-        {gallery.length > 0 && <section className="project-gallery" aria-label="Project gallery">
-          <div className="project-gallery-main"><Image src={gallery[0]} alt={title} fill sizes="(max-width: 980px) 100vw, 58vw" /></div>
-          {gallery.length > 1 && <div className="project-gallery-side">
-            {gallery.slice(1).map((image, index) => <div key={image}><Image src={image} alt={`${title} ${index + 2}`} fill sizes="(max-width: 980px) 100vw, 28vw" /></div>)}
-          </div>}
-        </section>}
-        <section className="project-cta"><p className="small-label">{t.project.next}</p><h2>{t.project.similar}</h2><p>{t.project.similarText}</p><Link className="button button-primary" href={withLocale('/contacts', lang)}>{t.project.discuss}</Link></section>
-      </div>
-    </main>
-    <Footer lang={lang}/>
-  </>
+  return <main id="main-content" className={styles.page}>
+    <div className={styles.topbar}>
+      <Link className={styles.back} href={withLocale(`/portfolio?category=${project.categorySlug}`, lang)}>← {t.project.back}</Link>
+    </div>
+    <section className={styles.gallery} aria-label="Project gallery">
+      {project.images.map((image, index) => <div className={styles.photo} key={image}>
+        <Image src={image} alt={`${title} ${index + 1}`} fill priority={index === 0} sizes="(max-width: 1180px) 100vw, 1180px" />
+      </div>)}
+    </section>
+  </main>
 }
