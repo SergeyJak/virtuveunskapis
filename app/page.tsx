@@ -8,6 +8,7 @@ import { projects } from '@/data/site'
 import { copy, normalizeLocale, withLocale, type Locale } from '@/data/i18n'
 import materialStyles from './materials.module.css'
 import aboutStyles from './about.module.css'
+import processStyles from './process.module.css'
 
 const categoryNames: Record<Locale, string[]> = {
   lv: ['Virtuves','Skapji','Vannas istabas','Citas mēbeles'],
@@ -74,7 +75,25 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
         <div className="project-grid">{projects.slice(0,3).map(p => <ProjectCard key={p.slug} project={p} lang={lang}/>)}</div>
       </div></section>
 
-      <section className="section process"><div className="container"><h2>{t.home.processTitle}</h2><div className="process-grid">{t.home.process.map(([n,title,description]) => <div key={n} className="process-step"><span>{n}</span><h3>{title}</h3><p>{description}</p></div>)}</div></div></section>
+      <section className={processStyles.section}>
+        <div className={`container ${processStyles.inner}`}>
+          <div className={processStyles.headingRow}>
+            <div>
+              <p className={processStyles.eyebrow}>Process</p>
+              <h2 className={processStyles.title}>{t.home.processTitle}</h2>
+            </div>
+          </div>
+          <div className={processStyles.grid}>
+            {t.home.process.map(([n,title,description]) => (
+              <article key={n} className={processStyles.card}>
+                <div className={processStyles.topline}><span className={processStyles.dot} /><span className={processStyles.number}>{n}</span></div>
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section id="materials" className={materialStyles.section}><div className={`container ${materialStyles.inner}`}>
         <div className={materialStyles.copy}><p className={materialStyles.eyebrow}>{t.home.materialsEyebrow}</p><h2>{t.home.materialsTitle}</h2><p>{t.home.materialsText}</p><Link className="button button-primary" href={withLocale('/contacts', lang)}>{t.home.materialsCta} <ArrowRight size={18} /></Link></div>
