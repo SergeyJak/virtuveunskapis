@@ -32,11 +32,12 @@ export default async function PortfolioPage({ searchParams }: { searchParams: Pr
           <h1>{t.portfolio.title}</h1>
           <p>{t.portfolio.text}</p>
         </div>
+        <div id="projects" />
         <nav className={`filter-row portfolio-filters ${styles.filters}`} aria-label="Project categories">
           {filters.map((filter) => {
             const active = category === filter.slug || (!category && !filter.slug)
             const href = filter.slug ? `/portfolio?category=${filter.slug}` : '/portfolio'
-            return <Link key={filter.label} href={withLocale(href, lang)} className={active ? styles.active : undefined}>{filter.label}</Link>
+            return <Link key={filter.label} href={`${withLocale(href, lang)}#projects`} className={active ? styles.active : undefined}>{filter.label}</Link>
           })}
         </nav>
         <div className="project-grid portfolio-grid">{visibleProjects.map(p => <ProjectCard key={p.slug} project={p} lang={lang}/>)}</div>

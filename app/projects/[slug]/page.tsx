@@ -51,6 +51,7 @@ export default async function ProjectPage({ params, searchParams }: { params: Pr
   const title = localized?.title ?? project.title
   const category = localized?.category ?? project.category
   const description = localized?.description ?? project.description
+  const gallery = project.images.slice(0, 3)
 
   return <>
     <div className="dark-header"><Header lang={lang} /></div>
@@ -59,7 +60,7 @@ export default async function ProjectPage({ params, searchParams }: { params: Pr
         <Image className="project-hero-bg" src={project.cover} alt={title} fill priority sizes="100vw" />
         <div className="project-hero-shade" />
         <div className="container project-hero-content">
-          <Link className="back-link" href={withLocale('/portfolio', lang)}>{t.project.back}</Link>
+          <Link className="back-link" href={`${withLocale(`/portfolio?category=${project.categorySlug}`, lang)}#projects`}>{t.project.back}</Link>
           <p className="small-label">{category}</p>
           <h1>{title}</h1>
           <div className="project-hero-meta"><span>{category}</span><span>{t.project.custom}</span></div>
@@ -72,10 +73,12 @@ export default async function ProjectPage({ params, searchParams }: { params: Pr
           <div className="project-details-panel"><p className="small-label">{t.project.fitEyebrow}</p><h2>{t.project.fitTitle}</h2><p>{t.project.fitText}</p></div>
           <div className="project-details-panel"><p className="small-label">{t.project.executionEyebrow}</p><h2>{t.project.executionTitle}</h2><p>{t.project.executionText}</p></div>
         </section>
-        <section className="project-gallery" aria-label="Project gallery">
-          <div className="project-gallery-main"><Image src={project.cover} alt={title} fill sizes="(max-width: 980px) 100vw, 58vw" /></div>
-          <div className="project-gallery-side"><div><Image src={project.cover} alt={`${title} detail`} fill sizes="(max-width: 980px) 100vw, 28vw" /></div><div><Image src={project.cover} alt={`${title} overview`} fill sizes="(max-width: 980px) 100vw, 28vw" /></div></div>
-        </section>
+        {gallery.length > 0 && <section className="project-gallery" aria-label="Project gallery">
+          <div className="project-gallery-main"><Image src={gallery[0]} alt={title} fill sizes="(max-width: 980px) 100vw, 58vw" /></div>
+          {gallery.length > 1 && <div className="project-gallery-side">
+            {gallery.slice(1).map((image, index) => <div key={image}><Image src={image} alt={`${title} ${index + 2}`} fill sizes="(max-width: 980px) 100vw, 28vw" /></div>)}
+          </div>}
+        </section>}
         <section className="project-cta"><p className="small-label">{t.project.next}</p><h2>{t.project.similar}</h2><p>{t.project.similarText}</p><Link className="button button-primary" href={withLocale('/contacts', lang)}>{t.project.discuss}</Link></section>
       </div>
     </main>
