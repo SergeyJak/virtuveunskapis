@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
-import { normalizeLocale, withLocale, type Locale } from '@/data/i18n'
+import { normalizeLocale, type Locale } from '@/data/i18n'
 import styles from './partners.module.css'
 
 const pageCopy: Record<Locale, {
@@ -68,7 +68,9 @@ export default async function PartnersPage({ searchParams }: { searchParams: Pro
           <div className={`container ${styles.grid}`}>
             <article className={styles.card}>
               <span className={styles.cardAccent} aria-hidden="true" />
-              <div className={styles.logoNoer} aria-label="NOER">NOER</div>
+              <div className={styles.logoStage}>
+                <img className={styles.noerLogo} src="/images/partners/noer.svg" alt="NOER" />
+              </div>
               <div className={styles.meta}>
                 <h2>{t.noerTitle}</h2>
                 <p>{t.noerText}</p>
@@ -77,7 +79,9 @@ export default async function PartnersPage({ searchParams }: { searchParams: Pro
 
             <article className={styles.card}>
               <span className={styles.cardAccent} aria-hidden="true" />
-              <div className={styles.logoHeySmart} aria-label="HeySmart">Hey<span>Smart</span></div>
+              <div className={`${styles.logoStage} ${styles.heySmartStage}`}>
+                <img className={styles.heySmartLogo} src="https://heysmart.lv/icons/icon-512.png" alt="HeySmart" />
+              </div>
               <div className={styles.meta}>
                 <h2>{t.heySmartTitle}</h2>
                 <p>{t.heySmartText}</p>
