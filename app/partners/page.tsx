@@ -47,6 +47,20 @@ const pageCopy: Record<Locale, {
   },
 }
 
+function NoerLogo() {
+  return (
+    <svg className={styles.noerLogo} viewBox="0 0 560 170" role="img" aria-label="NOER">
+      <g fill="#5a6870">
+        <path d="M0 20h68l71 98V20h70v130h-68L70 52v98H0z" />
+        <path d="M292 20h104v38h-56v11h51v35h-51v10h59v36H292z" />
+        <path d="M410 20h89c41 0 61 19 61 53 0 23-11 40-31 48l35 29h-66l-24-23h-13v23h-51zm51 39v31h28c14 0 21-5 21-15 0-11-7-16-21-16z" />
+      </g>
+      <circle cx="250" cy="85" r="74" fill="#f12822" />
+      <path d="M190 103c31 25 96 18 133-37-9 43-40 72-84 80-28 5-50-3-62-17 2-8 7-17 13-26z" fill="#0d0c0a" />
+    </svg>
+  )
+}
+
 export default async function PartnersPage({ searchParams }: { searchParams: Promise<{ lang?: string }> }) {
   const { lang: rawLang } = await searchParams
   const lang = normalizeLocale(rawLang)
@@ -69,7 +83,7 @@ export default async function PartnersPage({ searchParams }: { searchParams: Pro
             <article className={styles.card}>
               <span className={styles.cardAccent} aria-hidden="true" />
               <div className={styles.logoStage}>
-                <img className={styles.noerLogo} src="/images/partners/noer.svg" alt="NOER" />
+                <NoerLogo />
               </div>
               <div className={styles.meta}>
                 <h2>{t.noerTitle}</h2>
@@ -79,7 +93,7 @@ export default async function PartnersPage({ searchParams }: { searchParams: Pro
 
             <article className={styles.card}>
               <span className={styles.cardAccent} aria-hidden="true" />
-              <div className={`${styles.logoStage} ${styles.heySmartStage}`}>
+              <div className={styles.logoStage}>
                 <img className={styles.heySmartLogo} src="https://heysmart.lv/icons/icon-512.png" alt="HeySmart" />
               </div>
               <div className={styles.meta}>
