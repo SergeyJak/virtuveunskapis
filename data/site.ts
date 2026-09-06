@@ -26,48 +26,38 @@ export const categories = [
 export type Project = {
   slug: string
   title: string
-  location: string
   category: string
   cover: string
   description: string
-  materials: string[]
 }
 
 export const projects: Project[] = [
   {
-    slug: 'moderna-virtuve-marupe',
-    title: 'Moderna virtuve',
-    location: 'Mārupe',
+    slug: 'virtuve-467-serija',
+    title: 'Virtuve 467. sērijai',
     category: 'Virtuves',
     cover: '/images/projects/kitchen-light.jpg',
-    description: 'Gaiša, funkcionāla virtuve ar pārdomātu uzglabāšanu un dabīgu materiālu akcentiem.',
-    materials: ['MDF fasādes', 'Kvarca darba virsma', 'Blum furnitūra'],
+    description: 'Individuāli pielāgots virtuves risinājums 467. sērijas plānojumam.',
   },
   {
-    slug: 'virtuve-ar-salu',
-    title: 'Virtuve ar salu',
-    location: 'Rīga, Teika',
+    slug: 'virtuve-602-serija',
+    title: 'Virtuve 602. sērijai',
     category: 'Virtuves',
     cover: '/images/projects/kitchen-island.jpg',
-    description: 'Plaša virtuve ar centrālo salu, integrētu tehniku un siltu apgaismojumu.',
-    materials: ['Finieris', 'Kompaktā plātne', 'Hettich furnitūra'],
+    description: 'Virtuves risinājums 602. sērijas mājoklim, pielāgojot projektu konkrētās telpas izmēriem.',
   },
   {
-    slug: 'vannas-istaba-purvciems',
-    title: 'Vannas istaba',
-    location: 'Rīga, Purvciems',
-    category: 'Vannas istabas',
-    cover: '/images/projects/bathroom.jpg',
-    description: 'Mēbeles mitrai videi ar precīzu pielāgošanu telpas izmēriem.',
-    materials: ['Mitruma izturīgs MDF', 'Akmens virsma'],
-  },
-  {
-    slug: 'tumsa-virtuve-centrs',
-    title: 'Tumša virtuve',
-    location: 'Rīga, Centrs',
+    slug: 'virtuve-individuals-projekts',
+    title: 'Virtuve pēc individuāla projekta',
     category: 'Virtuves',
     cover: '/images/projects/kitchen-dark.jpg',
-    description: 'Izteiksmīga tumša virtuve ar siltu koka faktūru un kvalitatīvu furnitūru.',
-    materials: ['Ozola finieris', 'Matēts MDF', 'Blum furnitūra'],
+    description: 'Virtuve pēc individuāliem izmēriem un klienta ieceres, no projekta līdz uzstādīšanai.',
+  },
+  {
+    slug: 'vannas-istabas-mebeles',
+    title: 'Vannas istabas mēbeles',
+    category: 'Vannas istabas',
+    cover: '/images/projects/bathroom.jpg',
+    description: 'Individuāli izgatavotas mēbeles, kas pielāgotas konkrētās telpas izmēriem un vajadzībām.',
   },
 ]
