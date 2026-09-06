@@ -9,6 +9,7 @@ import { copy, normalizeLocale, withLocale, type Locale } from '@/data/i18n'
 import materialStyles from './materials.module.css'
 import aboutStyles from './about.module.css'
 import processStyles from './process.module.css'
+import advantageStyles from './advantages.module.css'
 
 const categoryNames: Record<Locale, string[]> = {
   lv: ['Virtuves','Skapji','Vannas istabas','Citas mēbeles'],
@@ -26,12 +27,45 @@ const benefitCopy: Record<Locale, [string,string][]> = {
   ru: [['Индивидуальный дизайн','Решения адаптируются к помещению, повседневным задачам и вашей визуальной идее.'],['Качественные материалы','Выбираем надёжные материалы и фурнитуру, рассчитанные на длительное использование.'],['Гарантия качества','Отвечаем за результат от первого эскиза до готового монтажа.'],['Согласованные сроки','Заранее согласовываем этапы работ и понятно информируем о ходе проекта.']],
   en: [['Custom design','Solutions are adapted to your space, daily needs and visual idea.'],['Quality materials','We select reliable materials and fittings designed for long-term use.'],['Quality assurance','We take responsibility for the result from the first sketch to final installation.'],['Clear schedule','We agree the work stages in advance and keep you informed about progress.']],
 }
+const advantageCopy: Record<Locale, { eyebrow: string; title: string; intro: string; items: [string,string,string][] }> = {
+  lv: {
+    eyebrow: 'Kāpēc izvēlas mūs',
+    title: 'Trīs lietas, kas maina rezultātu.',
+    intro: 'No mērīšanas līdz uzstādīšanai visu kontrolējam paši. Tas nozīmē stabilu kvalitāti, ātru darbu un cenu bez liekiem starpniekiem.',
+    items: [
+      ['Kvalitāte','Kvalitātes garantija','Mēs uzraugām pasūtījumu visos posmos, no mērīšanas līdz uzstādīšanai, un visu veicam paši.'],
+      ['Ātrums','Pašu profesionāļu komanda','Liela profesionālu galdnieku komanda strādā bez apakšuzņēmējiem, tāpēc process ir ātrāks un pārskatāmāks.'],
+      ['Cena','Par 15% lētāk','Pašu ražošana un darbs bez starpniekiem ļauj piedāvāt cenu par 15% zemāku nekā konkurentiem.'],
+    ],
+  },
+  ru: {
+    eyebrow: 'Почему выбирают нас',
+    title: 'Три вещи, которые влияют на результат.',
+    intro: 'От замера до установки мы контролируем всё сами. Это даёт стабильное качество, быстрый процесс и цену без лишних посредников.',
+    items: [
+      ['Качество','Гарантия качества','Контролируем заказ на всех этапах, от замера до установки, и выполняем работы своими силами.'],
+      ['Скорость','Своя команда профессионалов','Большая команда профессиональных столяров работает без субподрядчиков, поэтому процесс идёт быстрее и прозрачнее.'],
+      ['Цена','На 15% дешевле','Собственное производство и работа без посредников позволяют предлагать цену на 15% ниже, чем у конкурентов.'],
+    ],
+  },
+  en: {
+    eyebrow: 'Why choose us',
+    title: 'Three things that shape the result.',
+    intro: 'From measurement to installation, we keep the whole process in-house. That means consistent quality, faster work and pricing without unnecessary middlemen.',
+    items: [
+      ['Quality','Quality guarantee','We oversee every stage of the order, from measurement to installation, and carry out the work ourselves.'],
+      ['Speed','Our own professional team','A large team of professional carpenters works without subcontractors, making the process faster and more transparent.'],
+      ['Price','15% lower price','Our own production and direct workflow let us offer prices 15% lower than competitors.'],
+    ],
+  },
+}
 const icons = [DraftingCompass, Sparkles, ShieldCheck, Timer]
 
 export default async function HomePage({ searchParams }: { searchParams: Promise<{ lang?: string }> }) {
   const { lang: rawLang } = await searchParams
   const lang = normalizeLocale(rawLang)
   const t = copy[lang]
+  const advantages = advantageCopy[lang]
   const categories = categoryData.map(([href,image], index) => ({ href, image, title: categoryNames[lang][index] }))
 
   return (
@@ -61,6 +95,24 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
             <p className={aboutStyles.lead}>{t.home.aboutLead}</p>
             <p className={aboutStyles.text}>{t.home.aboutText}</p>
             <div className={aboutStyles.stats}>{t.home.stats.map(([value,label]) => <div key={value} className={aboutStyles.stat}><strong>{value}</strong><span>{label}</span></div>)}</div>
+          </div>
+        </div>
+      </section>
+
+      <section className={advantageStyles.section}>
+        <div className={`container ${advantageStyles.inner}`}>
+          <div className={advantageStyles.heading}>
+            <div><p className={advantageStyles.eyebrow}>{advantages.eyebrow}</p><h2 className={advantageStyles.title}>{advantages.title}</h2></div>
+            <p className={advantageStyles.intro}>{advantages.intro}</p>
+          </div>
+          <div className={advantageStyles.grid}>
+            {advantages.items.map(([label,title,description], index) => (
+              <article className={advantageStyles.item} key={label}>
+                <span className={advantageStyles.number}>0{index + 1} · {label}</span>
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
