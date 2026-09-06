@@ -77,16 +77,12 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
 
       <section className={processStyles.section}>
         <div className={`container ${processStyles.inner}`}>
-          <div className={processStyles.headingRow}>
-            <div>
-              <p className={processStyles.eyebrow}>Process</p>
-              <h2 className={processStyles.title}>{t.home.processTitle}</h2>
-            </div>
-          </div>
-          <div className={processStyles.grid}>
+          <p className={processStyles.eyebrow}>Process</p>
+          <h2 className={processStyles.title}>{t.home.processTitle}</h2>
+          <div className={processStyles.timeline}>
             {t.home.process.map(([n,title,description]) => (
-              <article key={n} className={processStyles.card}>
-                <div className={processStyles.topline}><span className={processStyles.dot} /><span className={processStyles.number}>{n}</span></div>
+              <article key={n} className={processStyles.step}>
+                <div className={processStyles.index}>{n}</div>
                 <h3>{title}</h3>
                 <p>{description}</p>
               </article>
