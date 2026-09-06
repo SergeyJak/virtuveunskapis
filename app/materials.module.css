@@ -44,6 +44,7 @@
   font-size: clamp(40px, 5vw, 72px);
   line-height: .98;
   letter-spacing: -.045em;
+  overflow-wrap: anywhere;
 }
 
 .copy > p:not(.eyebrow) {
@@ -107,12 +108,16 @@
   }
 
   .copy h2 {
-    font-size: 46px;
+    font-size: clamp(40px, 12vw, 46px);
   }
 
   .copy > p:not(.eyebrow) {
     margin: 22px 0 28px;
     font-size: 16px;
+  }
+
+  .copy :global(.button) {
+    width: 100%;
   }
 
   .grid {
