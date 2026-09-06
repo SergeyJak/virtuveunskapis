@@ -21,6 +21,7 @@ export const categories = [
 
 export type Project = {
   slug: string
+  sourceName: string
   title: string
   category: string
   categorySlug: 'kitchens' | 'wardrobes' | 'bathrooms'
@@ -49,6 +50,7 @@ function displayName(category: Project['categorySlug'], sourceName: string) {
 
 export const projects: Project[] = (generatedProjects as Array<{ slug: string; category: Project['categorySlug']; sourceName: string; images: string[] }>).map((project) => ({
   slug: project.slug,
+  sourceName: project.sourceName,
   title: displayName(project.category, project.sourceName),
   category: categoryCopy[project.category].category,
   categorySlug: project.category,
