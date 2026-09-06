@@ -34,7 +34,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
   return <>
     <div className="dark-header"><Header /></div>
-    <main className="project-page">
+    <main id="main-content" className="project-page">
       <section className="project-hero">
         <Image className="project-hero-bg" src={project.cover} alt={project.title} fill priority sizes="100vw" />
         <div className="project-hero-shade" />

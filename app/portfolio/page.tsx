@@ -25,7 +25,7 @@ export default async function PortfolioPage({ searchParams }: { searchParams: Pr
 
   return <>
     <div className="dark-header"><Header /></div>
-    <main className="page portfolio-page">
+    <main id="main-content" className="page portfolio-page">
       <div className="container portfolio-shell">
         <div className="page-intro portfolio-intro">
           <p className="small-label">Portfolio</p>

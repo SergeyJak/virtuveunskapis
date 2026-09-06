@@ -43,7 +43,7 @@ export default function HomePage() {
     <>
       <div className="hero-shell hero-shell-home">
         <Header />
-        <main>
+        <main id="main-content">
           <section className="hero">
             <Image className="hero-image" src="/images/hero.jpg" alt="Individuāli projektēta tumša virtuve" fill priority sizes="100vw" />
             <div className="hero-shade hero-shade-home" />

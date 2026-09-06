@@ -8,7 +8,7 @@ export const metadata = { title: 'Kontakti', description: 'Sazinieties ar Virtuv
 export default function ContactsPage() {
   return <>
     <div className="dark-header"><Header /></div>
-    <main className="contact-page contact-page-premium">
+    <main id="main-content" className="contact-page contact-page-premium">
       <div className="container contact-premium-shell">
         <section className="contact-premium-intro">
           <div className="contact-premium-copy">
