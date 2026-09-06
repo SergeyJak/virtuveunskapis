@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -6,6 +7,25 @@ import { Footer } from '@/components/Footer'
 import { projects } from '@/data/site'
 
 export function generateStaticParams() { return projects.map(({ slug }) => ({ slug })) }
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const project = projects.find((item) => item.slug === slug)
+
+  if (!project) return {}
+
+  return {
+    title: project.title,
+    description: project.description,
+    alternates: { canonical: `/projects/${project.slug}` },
+    openGraph: {
+      title: `${project.title} | Virtuve un Skapis`,
+      description: project.description,
+      type: 'article',
+      images: [{ url: project.cover, alt: project.title }],
+    },
+  }
+}
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -50,8 +70,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <Image src={project.cover} alt={project.title} fill sizes="(max-width: 980px) 100vw, 58vw" />
           </div>
           <div className="project-gallery-side">
-            <div><Image src={project.cover} alt={project.title} fill sizes="(max-width: 980px) 100vw, 28vw" /></div>
-            <div><Image src={project.cover} alt={project.title} fill sizes="(max-width: 980px) 100vw, 28vw" /></div>
+            <div><Image src={project.cover} alt={`${project.title} — detaļa`} fill sizes="(max-width: 980px) 100vw, 28vw" /></div>
+            <div><Image src={project.cover} alt={`${project.title} — kopskats`} fill sizes="(max-width: 980px) 100vw, 28vw" /></div>
           </div>
         </section>
 
