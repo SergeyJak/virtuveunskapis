@@ -1,0 +1,12 @@
+@media (max-width: 640px) {
+  .filters {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .filters button {
+    flex: 0 0 auto;
+  }
+}
