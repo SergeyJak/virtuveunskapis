@@ -10,9 +10,7 @@ const pageCopy: Record<Locale, {
   title: string
   lead: string
   noerTitle: string
-  noerText: string
   heySmartTitle: string
-  heySmartText: string
   visit: string
 }> = {
   lv: {
@@ -20,9 +18,7 @@ const pageCopy: Record<Locale, {
     title: 'Partneri',
     lead: 'Mēs novērtējam ilgtermiņa sadarbību un strādājam kopā ar partneriem, kas papildina mūsu darbu un klientu pieredzi.',
     noerTitle: 'NOER',
-    noerText: 'Mūsu partneris.',
     heySmartTitle: 'HeySmart',
-    heySmartText: 'Mūsu interneta veikals.',
     visit: 'Apmeklēt heysmart.lv',
   },
   ru: {
@@ -30,9 +26,7 @@ const pageCopy: Record<Locale, {
     title: 'Партнёры',
     lead: 'Мы ценим долгосрочное сотрудничество и работаем с партнёрами, которые дополняют нашу работу и клиентский опыт.',
     noerTitle: 'NOER',
-    noerText: 'Наш партнёр.',
     heySmartTitle: 'HeySmart',
-    heySmartText: 'Наш интернет-магазин.',
     visit: 'Перейти на heysmart.lv',
   },
   en: {
@@ -40,9 +34,7 @@ const pageCopy: Record<Locale, {
     title: 'Partners',
     lead: 'We value long-term collaboration and work with partners who complement our work and customer experience.',
     noerTitle: 'NOER',
-    noerText: 'Our partner.',
     heySmartTitle: 'HeySmart',
-    heySmartText: 'Our online store.',
     visit: 'Visit heysmart.lv',
   },
 }
@@ -87,7 +79,6 @@ export default async function PartnersPage({ searchParams }: { searchParams: Pro
               </div>
               <div className={styles.meta}>
                 <h2>{t.noerTitle}</h2>
-                <p>{t.noerText}</p>
               </div>
             </article>
 
@@ -98,7 +89,6 @@ export default async function PartnersPage({ searchParams }: { searchParams: Pro
               </div>
               <div className={styles.meta}>
                 <h2>{t.heySmartTitle}</h2>
-                <p>{t.heySmartText}</p>
                 <Link className={styles.external} href="https://heysmart.lv" target="_blank" rel="noreferrer">{t.visit} <ArrowUpRight size={17} /></Link>
               </div>
             </article>
