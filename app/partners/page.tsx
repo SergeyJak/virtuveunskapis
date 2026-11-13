@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
@@ -11,7 +10,6 @@ const pageCopy: Record<Locale, {
   lead: string
   noerTitle: string
   heySmartTitle: string
-  visit: string
 }> = {
   lv: {
     eyebrow: 'Sadarbība',
@@ -19,7 +17,6 @@ const pageCopy: Record<Locale, {
     lead: 'Mēs novērtējam ilgtermiņa sadarbību un strādājam kopā ar partneriem, kas papildina mūsu darbu un klientu pieredzi.',
     noerTitle: 'NOER',
     heySmartTitle: 'HeySmart',
-    visit: 'Apmeklēt heysmart.lv',
   },
   ru: {
     eyebrow: 'Сотрудничество',
@@ -27,7 +24,6 @@ const pageCopy: Record<Locale, {
     lead: 'Мы ценим долгосрочное сотрудничество и работаем с партнёрами, которые дополняют нашу работу и клиентский опыт.',
     noerTitle: 'NOER',
     heySmartTitle: 'HeySmart',
-    visit: 'Перейти на heysmart.lv',
   },
   en: {
     eyebrow: 'Collaboration',
@@ -35,7 +31,6 @@ const pageCopy: Record<Locale, {
     lead: 'We value long-term collaboration and work with partners who complement our work and customer experience.',
     noerTitle: 'NOER',
     heySmartTitle: 'HeySmart',
-    visit: 'Visit heysmart.lv',
   },
 }
 
@@ -57,6 +52,10 @@ export default async function PartnersPage({ searchParams }: { searchParams: Pro
   const { lang: rawLang } = await searchParams
   const lang = normalizeLocale(rawLang)
   const t = pageCopy[lang]
+  const partners = [
+    { title: t.noerTitle, domain: 'noer.lv', href: 'https://noer.lv/', logo: <NoerLogo /> },
+    { title: t.heySmartTitle, domain: 'heysmart.lv', href: 'https://heysmart.lv/', logo: <img className={styles.heySmartLogo} src="https://heysmart.lv/icons/icon-512.png" alt="HeySmart" /> },
+  ]
 
   return (
     <div className={styles.page}>
@@ -72,26 +71,21 @@ export default async function PartnersPage({ searchParams }: { searchParams: Pro
 
         <section className={styles.partners}>
           <div className={`container ${styles.grid}`}>
-            <article className={styles.card}>
-              <span className={styles.cardAccent} aria-hidden="true" />
-              <div className={styles.logoStage}>
-                <NoerLogo />
-              </div>
-              <div className={styles.meta}>
-                <h2>{t.noerTitle}</h2>
-              </div>
-            </article>
-
-            <article className={styles.card}>
-              <span className={styles.cardAccent} aria-hidden="true" />
-              <div className={styles.logoStage}>
-                <img className={styles.heySmartLogo} src="https://heysmart.lv/icons/icon-512.png" alt="HeySmart" />
-              </div>
-              <div className={styles.meta}>
-                <h2>{t.heySmartTitle}</h2>
-                <Link className={styles.external} href="https://heysmart.lv" target="_blank" rel="noreferrer">{t.visit} <ArrowUpRight size={17} /></Link>
-              </div>
-            </article>
+            {partners.map((partner) => (
+              <article className={styles.partner} key={partner.domain}>
+                <a className={styles.card} href={partner.href} target="_blank" rel="noopener noreferrer" aria-label={`${partner.title} — ${partner.domain}`}>
+                  <span className={styles.cardAccent} aria-hidden="true" />
+                  <div className={styles.logoStage}>{partner.logo}</div>
+                  <div className={styles.meta}>
+                    <div>
+                      <h2>{partner.title}</h2>
+                      <span className={styles.domain}>{partner.domain}</span>
+                    </div>
+                    <span className={styles.arrow} aria-hidden="true"><ArrowUpRight size={21} /></span>
+                  </div>
+                </a>
+              </article>
+            ))}
           </div>
         </section>
       </main>
