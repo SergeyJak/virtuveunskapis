@@ -150,3 +150,18 @@ test('three public page visits from one browser count as three views and one vis
   assert.equal(result.summary.sessions, 1);
   assert.equal(result.summary.pageViews, 3);
 });
+test('explicit additional origins work without relying on Railway runtime hostname metadata', () => {
+  const previous = { site: process.env.SITE_ORIGIN, railway: process.env.RAILWAY_PUBLIC_DOMAIN, additional: process.env.ADDITIONAL_SITE_ORIGINS };
+  process.env.SITE_ORIGIN = 'https://primary.example';
+  delete process.env.RAILWAY_PUBLIC_DOMAIN;
+  process.env.ADDITIONAL_SITE_ORIGINS = 'https://secondary.example, https://portfolio-production.up.railway.app';
+  const request = origin => new Request('http://internal:8080/api/public/analytics/event', { headers: { origin } });
+  try {
+    for (const origin of ['https://primary.example', 'https://secondary.example', 'https://portfolio-production.up.railway.app']) assert.doesNotThrow(() => http.assertOrigin(request(origin)));
+    for (const origin of ['https://evil.example', 'https://other.up.railway.app', 'http://secondary.example']) assert.throws(() => http.assertOrigin(request(origin)));
+  } finally {
+    for (const [name, value] of [['SITE_ORIGIN', previous.site], ['RAILWAY_PUBLIC_DOMAIN', previous.railway], ['ADDITIONAL_SITE_ORIGINS', previous.additional]]) {
+      if (value === undefined) delete process.env[name]; else process.env[name] = value;
+    }
+  }
+});

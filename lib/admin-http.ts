@@ -3,6 +3,14 @@ import { AdminError } from './admin-store'
 export function assertOrigin(request: Request) {
   const expected = process.env.SITE_ORIGIN || new URL(request.url).origin
   const allowed = new Set([expected])
+  for (const candidate of (process.env.ADDITIONAL_SITE_ORIGINS || '').split(',')) {
+    const origin = candidate.trim()
+    if (!origin) continue
+    try {
+      const parsed = new URL(origin)
+      if (parsed.protocol === 'https:' && parsed.origin === origin) allowed.add(origin)
+    } catch { /* Invalid configured origins fail closed. */ }
+  }
   // Railway supplies this hostname; never trust client Host or forwarded headers.
   const railwayDomain = process.env.RAILWAY_PUBLIC_DOMAIN
   if (railwayDomain && /^[a-z0-9-]+\.up\.railway\.app$/i.test(railwayDomain)) allowed.add(`https://${railwayDomain.toLowerCase()}`)
