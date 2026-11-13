@@ -15,6 +15,9 @@ export function checkPassword(password: string) {
   const [, salt, hash] = process.env.ADMIN_PASSWORD_HASH!.split(':')
   return timingSafeEqual(scryptSync(password, salt, 64), Buffer.from(hash, 'hex'))
 }
+export function checkCredentials(username: unknown, password: unknown) {
+  return username === 'admin' && typeof password === 'string' && checkPassword(password)
+}
 function signature(payload: string) { return createHmac('sha256', process.env.ADMIN_SESSION_SECRET!).update(payload).update(process.env.ADMIN_PASSWORD_HASH!).digest('base64url') }
 export function createSession(now = Date.now()) {
   if (!authConfigured()) throw new AdminError('Настройте пароль и секрет сессии на сервере.', 503)

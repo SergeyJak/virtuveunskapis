@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { authConfigured, checkPassword, COOKIE, createSession, requestSession, SESSION_SECONDS } from '@/lib/admin-auth'
+import { authConfigured, checkCredentials, COOKIE, createSession, requestSession, SESSION_SECONDS } from '@/lib/admin-auth'
 import { apiError, assertOrigin, clientIp, json, rateLimit, readBody, readJson } from '@/lib/admin-http'
 import { AdminError } from '@/lib/admin-store'
 import { listAdminProjects, saveProject, uploadImages } from '@/lib/admin-projects'
@@ -18,7 +18,7 @@ async function handle(request: NextRequest, context: { params: Promise<{ action:
       rateLimit(`login:${clientIp(request.headers) || 'shared'}`, 10, 15 * 60000)
       if (!authConfigured()) throw new AdminError('Настройте ADMIN_PASSWORD_HASH и ADMIN_SESSION_SECRET на сервере.', 503)
       const body = await readJson(request, 2048)
-      if (typeof body.password !== 'string' || !checkPassword(body.password)) throw new AdminError('Неверный пароль.', 401)
+      if (!checkCredentials(body.username, body.password)) throw new AdminError('Неверное имя пользователя или пароль.', 401)
       const response = NextResponse.json({ ok: true }, { headers: { 'Cache-Control': 'no-store' } })
       response.cookies.set(COOKIE, createSession(), { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict', maxAge: SESSION_SECONDS, path: '/' })
       return response

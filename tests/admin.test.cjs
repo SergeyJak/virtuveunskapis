@@ -116,3 +116,10 @@ test('structurally corrupt analytics rows fail on read and remain untouched on e
   await assert.rejects(() => analytics.recordEvent({ visitorId: 'visitor-12345678', sessionId: 'session-12345678', eventType: 'page_view', page: '/' }, new Headers()));
   assert.equal(await fs.readFile(path.join(dir, 'analytics.json'), 'utf8'), broken);
 });
+test('admin login requires the correct username as well as the password', () => {
+  assert.equal(typeof auth.checkCredentials, 'function');
+  assert.equal(auth.checkCredentials('admin', 'correct-password'), true);
+  assert.equal(auth.checkCredentials('other', 'correct-password'), false);
+  assert.equal(auth.checkCredentials(undefined, 'correct-password'), false);
+  assert.equal(auth.checkCredentials('admin', 'wrong-password'), false);
+});

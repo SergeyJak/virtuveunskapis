@@ -16,6 +16,7 @@ const eventLabels: Record<string,string> = { page_view: 'Просмотр стр
 export function AdminPanel() {
   const [authenticated, setAuthenticated] = useState<boolean | null>(null)
   const [configured, setConfigured] = useState(true)
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [tab, setTab] = useState<'projects' | 'visitors'>('projects')
   const [error, setError] = useState('')
@@ -84,7 +85,7 @@ export function AdminPanel() {
 
   async function login(event: FormEvent) {
     event.preventDefault(); setBusy(true); setError('')
-    try { await api('login', { method: 'POST', body: JSON.stringify({ password }) }); setPassword(''); setAuthenticated(true) }
+    try { await api('login', { method: 'POST', body: JSON.stringify({ username, password }) }); setPassword(''); setAuthenticated(true) }
     catch (e) { setError((e as Error).message) } finally { setBusy(false) }
   }
   function closeDraft() {
@@ -141,6 +142,7 @@ export function AdminPanel() {
     <form className={styles.loginCard} onSubmit={login}>
       <div className={styles.logoMark}><ShieldCheck size={26}/></div><p className={styles.eyebrow}>VIRTUVE UN SKAPIS</p><h1>Управление сайтом</h1><p className={styles.muted}>Проекты, фотографии и посетители — в одном месте.</p>
       {!configured && <div className={styles.message}>Первый запуск: задайте ADMIN_PASSWORD_HASH и ADMIN_SESSION_SECRET на сервере. Инструкция находится в docs/admin-setup.md.</div>}
+      <label>Имя пользователя<input name="username" autoComplete="username" required maxLength={80} value={username} onChange={e => setUsername(e.target.value)}/></label>
       <label>Пароль администратора<input name="password" type="password" autoComplete="current-password" required maxLength={256} value={password} onChange={e => setPassword(e.target.value)}/></label>
       {error && <p className={styles.error} role="alert">{error}</p>}
       <button className={styles.primary} disabled={busy || !configured}>{busy ? 'Входим…' : 'Войти'}<ArrowRight size={18}/></button>
