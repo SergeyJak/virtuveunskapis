@@ -14,14 +14,6 @@ Definition of Done
 
 Context Economy
 
-## Maximum scope
-
-За одну задачу агент имеет право изменить
-не более 5 файлов.
-
-Если требуется больше —
-остановиться и сообщить об этом.
-
 ## Context
 
 Never read files that are not required for the current task.

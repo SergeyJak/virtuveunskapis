@@ -39,7 +39,7 @@ export function PortfolioGallery({ projects, lang, initialCategory = '' }: { pro
     <nav className={`filter-row portfolio-filters ${styles.filters}`} aria-label="Project categories">
       {filters.map((filter) => {
         const active = category === filter.slug
-        return <button key={filter.label} type="button" onClick={() => selectCategory(filter.slug)} className={active ? styles.active : undefined} aria-pressed={active}>{filter.label}</button>
+        return <button key={filter.label} data-analytics-category={filter.slug || 'all'} type="button" onClick={() => selectCategory(filter.slug)} className={active ? styles.active : undefined} aria-pressed={active}>{filter.label}</button>
       })}
     </nav>
     <div className="project-grid portfolio-grid">{visibleProjects.map((project) => <ProjectCard key={project.slug} project={project} lang={lang}/>)}</div>

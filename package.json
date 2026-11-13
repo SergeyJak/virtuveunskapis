@@ -7,7 +7,9 @@
     "dev": "node scripts/generate-project-manifest.mjs && next dev",
     "build": "node scripts/generate-project-manifest.mjs && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "tsc -p tsconfig.test.json && node tests/admin.test.cjs",
+    "admin:password": "node scripts/admin-password.mjs"
   },
   "dependencies": {
     "lucide-react": "0.468.0",

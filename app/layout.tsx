@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+import { VisitorTracker } from '@/components/VisitorTracker'
 import type { Metadata } from 'next'
 import './globals.css'
 import './accessibility.css'
@@ -15,5 +17,5 @@ export const metadata: Metadata = {
   },
 }
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="lv"><body><a className="skip-link" href="#main-content">Pāriet uz saturu</a>{children}</body></html>
+  return <html lang="lv"><body><a className="skip-link" href="#main-content">Pāriet uz saturu</a>{children}<Suspense fallback={null}><VisitorTracker /></Suspense></body></html>
 }
