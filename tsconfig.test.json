@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "module": "commonjs", "moduleResolution": "node", "noEmit": false, "outDir": ".test-build", "incremental": false, "isolatedModules": false },
+  "include": ["lib/admin-*.ts", "data/site.ts"],
+  "exclude": ["node_modules", ".next"]
+}

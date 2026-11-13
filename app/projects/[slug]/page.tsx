@@ -2,15 +2,18 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { projects } from '@/data/site'
+import { getProjects } from '@/lib/admin-projects'
+
+export const dynamic = 'force-dynamic'
 import { localizeProject } from '@/data/project-i18n'
 import { copy, normalizeLocale, withLocale } from '@/data/i18n'
 import styles from './project-photo.module.css'
 
-export function generateStaticParams() { return projects.map(({ slug }) => ({ slug })) }
+
 
 export async function generateMetadata({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams: Promise<{ lang?: string }> }): Promise<Metadata> {
   const [{ slug }, { lang: rawLang }] = await Promise.all([params, searchParams])
+  const projects = await getProjects()
   const project = projects.find((item) => item.slug === slug)
   if (!project) return {}
   const lang = normalizeLocale(rawLang)
@@ -25,6 +28,7 @@ export async function generateMetadata({ params, searchParams }: { params: Promi
 
 export default async function ProjectPage({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams: Promise<{ lang?: string }> }) {
   const [{ slug }, { lang: rawLang }] = await Promise.all([params, searchParams])
+  const projects = await getProjects()
   const project = projects.find((item) => item.slug === slug)
   if (!project) notFound()
 

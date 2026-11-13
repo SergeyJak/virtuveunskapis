@@ -26,3 +26,9 @@ Open http://localhost:3000
 3. Connect form to email/backend.
 4. Add LV/RU/EN localization.
 5. Add real project content.
+
+## Администрирование
+
+Админка доступна по `/admin`: проекты, загрузка фотографий по категориям и статистика посетителей. Первичная настройка, переменные окружения и требования к постоянному диску: [docs/admin-setup.md](docs/admin-setup.md).
+
+Проверки: `npm test`, `npm run build`. Пароль и секрет сессии: `npm run admin:password`.

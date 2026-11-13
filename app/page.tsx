@@ -4,7 +4,9 @@ import { ArrowRight, DraftingCompass, ShieldCheck, Sparkles, Timer } from 'lucid
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ProjectCard } from '@/components/ProjectCard'
-import { projects } from '@/data/site'
+import { getProjects } from '@/lib/admin-projects'
+
+export const dynamic = 'force-dynamic'
 import { copy, normalizeLocale, withLocale, type Locale } from '@/data/i18n'
 import materialStyles from './materials.module.css'
 import aboutStyles from './about.module.css'
@@ -27,6 +29,7 @@ const advantageCopy: Record<Locale,{eyebrow:string;title:string;intro:string;ite
 const icons=[DraftingCompass,Sparkles,ShieldCheck,Timer]
 
 export default async function HomePage({searchParams}:{searchParams:Promise<{lang?:string}>}) {
+ const projects = await getProjects()
  const {lang:rawLang}=await searchParams; const lang=normalizeLocale(rawLang); const t=copy[lang]; const advantages=advantageCopy[lang]; const categories=categoryData.map(([href,image],index)=>({href,image,title:categoryNames[lang][index]}))
  return <>
   <div className="hero-shell hero-shell-home"><Header lang={lang}/><main id="main-content"><section className="hero"><Image className="hero-image" src="/images/hero.jpg" alt={t.home.heroTitle.join(' ')} fill priority sizes="100vw"/><div className="hero-shade hero-shade-home"/><div className="container hero-content"><h1>{t.home.heroTitle.map(line=><span key={line}>{line}<br/></span>)}</h1><p>{t.home.heroText}</p><div className="hero-buttons"><Link className="button button-primary" href={withLocale('/portfolio',lang)}>{t.home.projectsCta} <ArrowRight size={18}/></Link><Link className="button button-ghost" href={withLocale('/contacts',lang)}>{t.home.contactCta}</Link></div></div></section></main></div>

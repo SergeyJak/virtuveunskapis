@@ -62,6 +62,7 @@ function wardrobeTitle(project: Project, lang: Locale) {
 }
 
 export function localizeProject(project: Project, lang: Locale): ProjectCopy {
+  if (project.managed) return { title: project.title, category: project.category, description: project.description }
   const source = project.sourceName.toLowerCase()
   const title = project.title.toLowerCase()
 

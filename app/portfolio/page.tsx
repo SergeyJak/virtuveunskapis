@@ -1,12 +1,15 @@
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { PortfolioGallery } from '@/components/PortfolioGallery'
-import { projects } from '@/data/site'
+import { getProjects } from '@/lib/admin-projects'
+
+export const dynamic = 'force-dynamic'
 import { copy, normalizeLocale } from '@/data/i18n'
 
 export const metadata = { title: 'Projekti', description: 'Apskatiet Virtuve un Skapis mēbeļu risinājumu piemērus.' }
 
 export default async function PortfolioPage({ searchParams }: { searchParams: Promise<{ category?: string; lang?: string }> }) {
+  const projects = await getProjects()
   const { category = '', lang: rawLang } = await searchParams
   const lang = normalizeLocale(rawLang)
   const t = copy[lang]

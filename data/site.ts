@@ -29,6 +29,7 @@ export type Project = {
   cover: string
   description: string
   images: string[]
+  managed?: boolean
 }
 
 const categoryCopy = {
