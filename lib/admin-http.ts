@@ -2,7 +2,11 @@ import { AdminError } from './admin-store'
 
 export function assertOrigin(request: Request) {
   const expected = process.env.SITE_ORIGIN || new URL(request.url).origin
-  if (request.headers.get('origin') !== expected) throw new AdminError('Недопустимый источник запроса.', 403)
+  const allowed = new Set([expected])
+  // Railway supplies this hostname; never trust client Host or forwarded headers.
+  const railwayDomain = process.env.RAILWAY_PUBLIC_DOMAIN
+  if (railwayDomain && /^[a-z0-9-]+\.up\.railway\.app$/i.test(railwayDomain)) allowed.add(`https://${railwayDomain.toLowerCase()}`)
+  if (!allowed.has(request.headers.get('origin') || '')) throw new AdminError('Недопустимый источник запроса.', 403)
 }
 export async function readBody(request: Request, max: number) {
   const declared = Number(request.headers.get('content-length'))

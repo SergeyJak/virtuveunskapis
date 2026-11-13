@@ -123,3 +123,30 @@ test('admin login requires the correct username as well as the password', () => 
   assert.equal(auth.checkCredentials(undefined, 'correct-password'), false);
   assert.equal(auth.checkCredentials('admin', 'wrong-password'), false);
 });
+test('configured primary and exact Railway public domains accept same-site events behind a proxy', () => {
+  const oldSite = process.env.SITE_ORIGIN;
+  const oldRailway = process.env.RAILWAY_PUBLIC_DOMAIN;
+  process.env.SITE_ORIGIN = 'https://primary.example';
+  process.env.RAILWAY_PUBLIC_DOMAIN = 'portfolio-production.up.railway.app';
+  const request = (origin, extra = {}) => new Request('http://internal:8080/api/public/analytics/event', { headers: { ...(origin ? { origin } : {}), ...extra } });
+  try {
+    assert.doesNotThrow(() => http.assertOrigin(request('https://primary.example')));
+    assert.doesNotThrow(() => http.assertOrigin(request('https://portfolio-production.up.railway.app')));
+    assert.throws(() => http.assertOrigin(request('https://other.up.railway.app')));
+    assert.throws(() => http.assertOrigin(request('http://portfolio-production.up.railway.app')));
+    assert.throws(() => http.assertOrigin(request('https://evil.example', { 'x-forwarded-host': 'portfolio-production.up.railway.app' })));
+    assert.throws(() => http.assertOrigin(request(undefined)));
+  } finally {
+    if (oldSite === undefined) delete process.env.SITE_ORIGIN; else process.env.SITE_ORIGIN = oldSite;
+    if (oldRailway === undefined) delete process.env.RAILWAY_PUBLIC_DOMAIN; else process.env.RAILWAY_PUBLIC_DOMAIN = oldRailway;
+  }
+});
+test('three public page visits from one browser count as three views and one visitor', async () => {
+  for (const page of ['/', '/portfolio', '/partners']) {
+    await analytics.recordEvent({ visitorId: 'same-browser-123', sessionId: 'same-session-123', eventType: 'page_view', page }, new Headers({ 'user-agent': 'Mozilla/5.0 Chrome/131.0' }));
+  }
+  const result = await analytics.listVisitors(new URLSearchParams());
+  assert.equal(result.summary.uniqueVisitors, 1);
+  assert.equal(result.summary.sessions, 1);
+  assert.equal(result.summary.pageViews, 3);
+});

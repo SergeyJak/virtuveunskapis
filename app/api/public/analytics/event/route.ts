@@ -1,12 +1,11 @@
 import { recordEvent } from '@/lib/admin-analytics'
-import { requestSession } from '@/lib/admin-auth'
 import { apiError, assertOrigin, clientIp, rateLimit, readJson } from '@/lib/admin-http'
 
 export const runtime = 'nodejs'
 export async function POST(request: Request) {
   try {
     assertOrigin(request)
-    if (requestSession(request) || process.env.ANALYTICS_ENABLED === 'false') return new Response(null, { status: 204 })
+    if (process.env.ANALYTICS_ENABLED === 'false') return new Response(null, { status: 204 })
     rateLimit('events:global', 600)
     rateLimit(`events:${clientIp(request.headers) || 'shared'}`, 120)
     await recordEvent(await readJson(request, 4096), request.headers)
